@@ -50,11 +50,17 @@ function initializeSheet() {
   _setupCompetition(_sheet(ss, "Competition"));
   _setupSettings(_sheet(ss, "Settings"));
   ss.setActiveSheet(ss.getSheetByName("Raw Data"));
-  SpreadsheetApp.getUi().alert(
-    "✅ Bar Asra Review System Ready!\n\n" +
-    "📊 Raw Data — all star taps\n💬 Feedback — private feedback\n" +
-    "🏆 Competition — dinner-for-two entries\n⚙️ Settings\n\nNext → Deploy as Web App"
-  );
+  // Only show UI alert when running from editor (not from web app)
+  try {
+    SpreadsheetApp.getUi().alert(
+      "✅ Bar Asra Review System Ready!\n\n" +
+      "📊 Raw Data — all star taps\n💬 Feedback — private feedback\n" +
+      "🏆 Competition — dinner-for-two entries\n⚙️ Settings\n\nNext → Deploy as Web App"
+    );
+  } catch (e) {
+    // Silently ignore UI errors when running from web app context
+    Logger.log("initializeSheet completed (no UI available in this context)");
+  }
 }
 
 function _sheet(ss, name) { return ss.getSheetByName(name) || ss.insertSheet(name); }

@@ -566,7 +566,7 @@
     // ═════════════════════════════════════════════════════════════
     //  CONFIG — Replace with your deployed Web App URL
     // ═════════════════════════════════════════════════════════════
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbykzWiGzs_J9cCCzJz9Y39895UuKBLUSexzYXemuDb9gy1_NKtPXdh_jfHczelCszhG/exec";
 
     let GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJ_RfOprhzhlQRWgl0QMXqkKg";
     let GOOGLE_THRESHOLD = 5;
@@ -598,8 +598,13 @@
 
     function pick(n) {
       selectedRating = n; light(n);
-      // Fire rating immediately (image ping — no CORS)
-      new Image().src = WEB_APP_URL + "?action=submitRating&rating=" + n + "&source=website";
+      // Fire rating immediately
+      const pingUrl = WEB_APP_URL + "?action=submitRating&rating=" + n + "&source=website";
+      try {
+        fetch(pingUrl, { mode: "no-cors" }).catch(() => {});
+      } catch (e) {
+        new Image().src = pingUrl;
+      }
 
       setTimeout(() => {
         if (n >= GOOGLE_THRESHOLD) {
@@ -647,7 +652,14 @@
       const p = new URLSearchParams({
         action: "submitFeedback", rating: selectedRating, name, contact, message: msg,
       });
-      new Image().src = WEB_APP_URL + "?" + p;
+      
+      try {
+        // Use fetch with no-cors mode for Google Apps Script
+        await fetch(WEB_APP_URL + "?" + p, { mode: "no-cors" });
+      } catch (e) {
+        // Fallback to image ping if fetch fails
+        new Image().src = WEB_APP_URL + "?" + p;
+      }
 
       await delay(700);
       show("sDone");
@@ -674,9 +686,13 @@
 
       if (!valid) return;
 
-      // Log competition entry (image ping)
+      // Log competition entry
       const p = new URLSearchParams({ action: "submitCompetition", name, email });
-      new Image().src = WEB_APP_URL + "?" + p;
+      try {
+        await fetch(WEB_APP_URL + "?" + p, { mode: "no-cors" });
+      } catch (e) {
+        new Image().src = WEB_APP_URL + "?" + p;
+      }
 
       // Redirect to Google after a brief moment
       setTimeout(() => {

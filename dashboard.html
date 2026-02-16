@@ -970,7 +970,7 @@
     // ═══════════════════════════════════════════════════════════
     //  CONFIG — paste your deployed Web App URL here
     // ═══════════════════════════════════════════════════════════
-    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
+    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbykzWiGzs_J9cCCzJz9Y39895UuKBLUSexzYXemuDb9gy1_NKtPXdh_jfHczelCszhG/exec";
 
     var DATA = null;
     var currentFilter = "all";
@@ -986,7 +986,8 @@
       statusEl.textContent = "Refreshing…";
 
       try {
-        var res = await fetch(WEB_APP_URL + "?action=getData");
+        // Add cache-buster to prevent cached responses
+        var res = await fetch(WEB_APP_URL + "?action=getData&_=" + Date.now());
         var json = await res.json();
 
         // Check if server returned an error
@@ -1021,7 +1022,8 @@
           showError("Cannot reach your Google Apps Script. Possible causes:\n" +
             "• WEB_APP_URL is incorrect\n" +
             "• The script isn't deployed yet\n" +
-            "• CORS is blocked (try opening: " + WEB_APP_URL + "?action=getData in a new tab)");
+            "• CORS is blocked (try opening: " + WEB_APP_URL + "?action=getData in a new tab)\n\n" +
+            "DEBUG: Try this URL directly: " + WEB_APP_URL + "?action=getData");
         } else {
           showError("Error loading data: " + err.message);
         }
