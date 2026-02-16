@@ -275,12 +275,16 @@ function _buildDashboard() {
   const compRows = comp && comp.getLastRow()>1 ? comp.getRange(2,1,comp.getLastRow()-1,5).getValues() : [];
   const compEntries=[]; let totalComp=0, todayComp=0, compWeek=0, compMonth=0;
   for(let i=compRows.length-1;i>=0;i--){
-    const r=compRows[i], d=r[3]||"", rd=new Date(r[0]);
+    const r=compRows[i];
+    const d=r[3]||"";
+    let rd;
+    try { rd = new Date(r[0]); } catch(e) { rd = new Date(); }
+    if(isNaN(rd.getTime())) rd = new Date();
     totalComp++; 
     if(d===todayStr) todayComp++;
     if(rd>=weekAgo) compWeek++;
     if(rd>=monthAgo) compMonth++;
-    if(compEntries.length<50) compEntries.push({name:r[1]||"",email:r[2]||"",date:d,clicked:r[4]||""});
+    if(compEntries.length<50) compEntries.push({name:String(r[1]||""),email:String(r[2]||""),date:String(d),clicked:String(r[4]||"")});
   }
 
   // Raw data for Google conversion tracking only

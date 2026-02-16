@@ -1387,7 +1387,11 @@
     // ═══════════════════════════════════════════════════════════
 
     function renderComp() {
+      console.log("renderComp called, DATA:", DATA);
       var s = DATA.stats || {};
+      console.log("Comp stats:", s.totalCompEntries, s.todayCompEntries, s.weekCompEntries, s.monthCompEntries);
+      console.log("Comp entries:", DATA.compEntries);
+      
       document.getElementById("compCount").textContent = (s.totalCompEntries || 0) + " entries";
       document.getElementById("compToday").textContent = s.todayCompEntries || 0;
       document.getElementById("compWeek").textContent = s.weekCompEntries || 0;
