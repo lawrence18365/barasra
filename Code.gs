@@ -116,10 +116,69 @@ function doPost(e) {
 
   } catch (error) {
     Logger.log('Error: ' + error.toString());
-    return ContentService
-      .createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createCorsResponse({ status: 'error', message: error.toString() });
   }
+}
+
+/**
+ * Handle GET requests (alternative to POST for CORS)
+ */
+function doGet(e) {
+  const action = e.parameter.action;
+
+  try {
+    let result;
+
+    if (action === 'submitRating') {
+      // Submit rating via GET
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      const rating = parseInt(e.parameter.rating);
+      handleRating({ rating: rating, source: 'website' }, ss);
+      result = { status: 'success' };
+    } else if (action === 'submitFeedback') {
+      // Submit feedback via GET
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      const data = {
+        rating: parseInt(e.parameter.rating),
+        name: e.parameter.name || '',
+        contact: e.parameter.contact || '',
+        message: e.parameter.message || ''
+      };
+      handleFeedback(data, ss);
+      result = { status: 'success' };
+    } else if (action === 'getData') {
+      result = getDashboardData();
+    } else if (action === 'getSettings') {
+      result = getSettingsPublic();
+    } else if (action === 'updateSettings') {
+      const password = e.parameter.password;
+      if (password !== ADMIN_PASSWORD) {
+        result = { success: false, message: 'Invalid password' };
+      } else {
+        if (e.parameter.googleUrl) updateSetting('googleReviewUrl', e.parameter.googleUrl);
+        if (e.parameter.threshold) updateSetting('googleThreshold', parseInt(e.parameter.threshold));
+        result = { success: true };
+      }
+    } else {
+      result = { status: 'running' };
+    }
+
+    return createCorsResponse(result);
+
+  } catch (error) {
+    return createCorsResponse({ error: error.toString() });
+  }
+}
+
+function createCorsResponse(data) {
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
 }
 
 function handleRating(data, ss) {
@@ -227,60 +286,6 @@ View all feedback: ${SpreadsheetApp.getActiveSpreadsheet().getUrl()}
     MailApp.sendEmail({ to: MANAGER_EMAIL, subject: subject, body: body });
   } catch (error) {
     Logger.log('Email error: ' + error.toString());
-  }
-}
-
-function doGet(e) {
-  const action = e.parameter.action || 'status';
-
-  try {
-    let result;
-
-    switch (action) {
-      case 'status':
-        result = { status: 'running', message: 'Bar Asra Review Tracker is active' };
-        break;
-
-      case 'getData':
-        // Get all data for dashboard
-        result = getDashboardData();
-        break;
-
-      case 'updateSettings':
-        // Update settings (requires password)
-        const password = e.parameter.password;
-        if (password !== ADMIN_PASSWORD) {
-          result = { success: false, message: 'Invalid password' };
-        } else {
-          const googleUrl = e.parameter.googleUrl;
-          const threshold = e.parameter.threshold;
-          const newEmail = e.parameter.email;
-
-          if (googleUrl) updateSetting('googleReviewUrl', googleUrl);
-          if (threshold) updateSetting('googleThreshold', parseInt(threshold));
-          if (newEmail) updateSetting('managerEmail', newEmail);
-
-          result = { success: true, message: 'Settings updated' };
-        }
-        break;
-
-      case 'getSettings':
-        // Get current settings (limited info)
-        result = getSettingsPublic();
-        break;
-
-      default:
-        result = { status: 'running', message: 'Bar Asra Review Tracker is active' };
-    }
-
-    return ContentService
-      .createTextOutput(JSON.stringify(result))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ error: error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 

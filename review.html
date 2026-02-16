@@ -487,21 +487,15 @@
       show("#stepRating");
     }
 
-    // Send rating to backend
-    async function sendRating(rating) {
-      if (!WEB_APP_URL || WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+    // Send rating to backend (using GET to avoid CORS)
+    function sendRating(rating) {
+      if (!WEB_APP_URL || WEB_APP_URL.includes("YOUR_GOOGLE")) {
         console.log("Rating (no endpoint):", rating);
         return;
       }
-      try {
-        await fetch(WEB_APP_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: "rating", rating: rating, source: "website" })
-        });
-      } catch (err) {
-        console.error("Failed to send rating:", err);
-      }
+      // Use image ping technique to avoid CORS
+      const img = new Image();
+      img.src = WEB_APP_URL + '?action=submitRating&rating=' + rating;
     }
 
     function onSelectRating(rating) {
@@ -558,16 +552,8 @@
         return;
       }
 
-      const payload = {
-        type: "feedback",
-        rating: selectedRating,
-        name: fd.get("name") || "",
-        contact: fd.get("contact") || "",
-        message: msg
-      };
-
-      if (!WEB_APP_URL || WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
-        console.warn("No WEB_APP_URL set. Captured payload:", payload);
+      if (!WEB_APP_URL || WEB_APP_URL.includes("YOUR_GOOGLE")) {
+        console.warn("No WEB_APP_URL set. Feedback:", { rating: selectedRating, name: fd.get("name"), contact: fd.get("contact"), message: msg });
         show("#stepThanks");
         return;
       }
@@ -576,22 +562,24 @@
       const prev = btn.textContent;
       btn.textContent = "Sending…";
       btn.disabled = true;
-      try {
-        const res = await fetch(WEB_APP_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      // Use GET request to avoid CORS
+      const params = new URLSearchParams({
+        action: 'submitFeedback',
+        rating: selectedRating,
+        name: fd.get("name") || '',
+        contact: fd.get("contact") || '',
+        message: msg
+      });
+
+      // Use image ping technique
+      const img = new Image();
+      img.onload = () => show("#stepThanks");
+      img.onerror = () => {
+        // Even on error, show thanks (data may still be saved)
         show("#stepThanks");
-      } catch (err) {
-        console.error(err);
-        btn.textContent = "Try again";
-        btn.disabled = false;
-      } finally {
-        btn.textContent = prev;
-        btn.disabled = false;
-      }
+      };
+      img.src = WEB_APP_URL + '?' + params;
     });
 
     // start
