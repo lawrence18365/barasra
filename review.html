@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,248 +8,347 @@
   <title>Bar Asra – Feedback</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <style>
-    :root{
-      --bg:#000;
-      --panelA:rgba(255,255,255,.075);
-      --panelB:rgba(255,255,255,.04);
-      --stroke:rgba(255,255,255,.14);
-      --stroke2:rgba(255,255,255,.18);
-      --text:rgba(255,255,255,.94);
-      --muted:rgba(255,255,255,.74);
-      --muted2:rgba(255,255,255,.58);
-      --accent:#C7A27A;
-      --accentSoft:rgba(199,162,122,.16);
-      --r:20px;
-      --shadow:0 28px 90px rgba(0,0,0,.72);
-      --maxw:560px;
+    :root {
+      --bg: #000;
+      --panelA: rgba(255, 255, 255, .075);
+      --panelB: rgba(255, 255, 255, .04);
+      --stroke: rgba(255, 255, 255, .14);
+      --stroke2: rgba(255, 255, 255, .18);
+      --text: rgba(255, 255, 255, .94);
+      --muted: rgba(255, 255, 255, .74);
+      --muted2: rgba(255, 255, 255, .58);
+      --accent: #C7A27A;
+      --accentSoft: rgba(199, 162, 122, .16);
+      --r: 20px;
+      --shadow: 0 28px 90px rgba(0, 0, 0, .72);
+      --maxw: 560px;
     }
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
       background:
-        radial-gradient(1100px 700px at 22% -10%, rgba(199,162,122,0.13), transparent 60%),
-        radial-gradient(900px 600px at 110% 0%, rgba(255,255,255,0.07), transparent 55%),
+        radial-gradient(1100px 700px at 22% -10%, rgba(199, 162, 122, 0.13), transparent 60%),
+        radial-gradient(900px 600px at 110% 0%, rgba(255, 255, 255, 0.07), transparent 55%),
         var(--bg);
-      color:var(--text);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      letter-spacing:.1px;
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      letter-spacing: .1px;
     }
-    .wrap{
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:22px 14px;
+
+    .wrap {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 14px;
     }
-    .card{
-      width:100%;
-      max-width:var(--maxw);
-      background:linear-gradient(180deg, var(--panelA), var(--panelB));
-      border:1px solid var(--stroke);
-      border-radius:var(--r);
-      box-shadow:var(--shadow);
-      overflow:hidden;
+
+    .card {
+      width: 100%;
+      max-width: var(--maxw);
+      background: linear-gradient(180deg, var(--panelA), var(--panelB));
+      border: 1px solid var(--stroke);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      overflow: hidden;
       backdrop-filter: blur(10px);
     }
-    .brand{
-      padding:14px 18px 12px;
-      background:rgba(0,0,0,.24);
-      border-bottom:1px solid var(--stroke);
-      display:flex;
-      justify-content:center;
+
+    .brand {
+      padding: 14px 18px 12px;
+      background: rgba(0, 0, 0, .24);
+      border-bottom: 1px solid var(--stroke);
+      display: flex;
+      justify-content: center;
     }
-    .logo{
-      max-width:180px;
-      width:44%;
-      min-width:130px;
-      height:auto;
-      display:block;
-      filter: drop-shadow(0 10px 26px rgba(0,0,0,0.55));
+
+    .logo {
+      max-width: 180px;
+      width: 44%;
+      min-width: 130px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55));
     }
-    .step{ padding:18px; }
-    .hidden{ display:none; }
-    .h1,.h2{
-      font-family:"Bodoni Moda", serif;
-      font-weight:500;
-      letter-spacing:.2px;
-      margin:8px 0 8px;
+
+    .step {
+      padding: 18px;
     }
-    .h1{ font-size:34px; line-height:1.04; }
-    .h2{ font-size:24px; line-height:1.08; }
-    .sub{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.45;
+
+    .hidden {
+      display: none;
     }
-    .rating{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      padding:10px 0 6px;
+
+    .h1,
+    .h2 {
+      font-family: "Bodoni Moda", serif;
+      font-weight: 500;
+      letter-spacing: .2px;
+      margin: 8px 0 8px;
     }
-    .rateBtn{
-      flex:1 1 92px;
-      max-width:112px;
-      min-width:92px;
-      height:66px;
-      border-radius:999px;
-      border:1px solid var(--stroke2);
-      background:rgba(255,255,255,.05);
-      color:rgba(255,255,255,.94);
-      cursor:pointer;
-      -webkit-tap-highlight-color:transparent;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+
+    .h1 {
+      font-size: 34px;
+      line-height: 1.04;
+    }
+
+    .h2 {
+      font-size: 24px;
+      line-height: 1.08;
+    }
+
+    .sub {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .rating {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0 6px;
+    }
+
+    .rateBtn {
+      flex: 1 1 92px;
+      max-width: 112px;
+      min-width: 92px;
+      height: 66px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke2);
+      background: rgba(255, 255, 255, .05);
+      color: rgba(255, 255, 255, .94);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform .08s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
     }
-    .rateBtn:hover{ background:rgba(255,255,255,.065); }
-    .rateBtn:active{ transform:scale(.99); }
-    .rateBtn:focus{ outline:2px solid rgba(199,162,122,.35); outline-offset:2px; }
-    .rateNum{
-      font-family:"Bodoni Moda", serif;
-      font-size:30px;
-      font-weight:500;
-      line-height:1;
-      letter-spacing:.2px;
+
+    .rateBtn:hover {
+      background: rgba(255, 255, 255, .065);
+    }
+
+    .rateBtn:active {
+      transform: scale(.99);
+    }
+
+    .rateBtn:focus {
+      outline: 2px solid rgba(199, 162, 122, .35);
+      outline-offset: 2px;
+    }
+
+    .rateNum {
+      font-family: "Bodoni Moda", serif;
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: .2px;
       transform: translateY(-1px);
     }
-    .rateBtn[data-active="true"]{
-      border-color:rgba(199,162,122,.78);
-      background:rgba(199,162,122,.12);
-      box-shadow: 0 0 0 4px rgba(199,162,122,.12);
+
+    .rateBtn[data-active="true"] {
+      border-color: rgba(199, 162, 122, .78);
+      background: rgba(199, 162, 122, .12);
+      box-shadow: 0 0 0 4px rgba(199, 162, 122, .12);
     }
-    .rateBtn[data-active="true"] .rateNum{ color:var(--accent); }
-    @media (max-width:420px){
-      .h1{ font-size:30px; }
-      .rateBtn{ height:64px; min-width:86px; }
-      .rateNum{ font-size:28px; }
+
+    .rateBtn[data-active="true"] .rateNum {
+      color: var(--accent);
     }
-    .divider{
-      height:1px;
-      background:rgba(255,255,255,.10);
-      margin:14px 0 0;
+
+    @media (max-width:420px) {
+      .h1 {
+        font-size: 30px;
+      }
+
+      .rateBtn {
+        height: 64px;
+        min-width: 86px;
+      }
+
+      .rateNum {
+        font-size: 28px;
+      }
     }
-    .form{ margin-top:10px; }
-    .grid{
-      display:grid;
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .10);
+      margin: 14px 0 0;
+    }
+
+    .form {
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      gap:12px;
+      gap: 12px;
     }
-    @media (max-width:520px){
-      .grid{ grid-template-columns:1fr; }
+
+    @media (max-width:520px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-bottom:12px;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-    .label{
-      font-size:12px;
-      color:var(--muted2);
-      letter-spacing:.2px;
+
+    .label {
+      font-size: 12px;
+      color: var(--muted2);
+      letter-spacing: .2px;
     }
-    .input{
-      width:100%;
-      border-radius:14px;
-      border:1px solid var(--stroke2);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      padding:13px 12px;
-      font-size:15px;
-      outline:none;
+
+    .input {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--stroke2);
+      background: rgba(255, 255, 255, .05);
+      color: var(--text);
+      padding: 13px 12px;
+      font-size: 15px;
+      outline: none;
     }
-    .input::placeholder{ color: rgba(255,255,255,.34); }
-    .input:focus{
-      border-color:rgba(199,162,122,.80);
-      box-shadow:0 0 0 4px var(--accentSoft);
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, .34);
     }
-    textarea.input{
-      resize:vertical;
-      min-height:130px;
+
+    .input:focus {
+      border-color: rgba(199, 162, 122, .80);
+      box-shadow: 0 0 0 4px var(--accentSoft);
     }
-    .actions{
-      display:flex;
-      gap:12px;
-      margin-top:14px;
+
+    textarea.input {
+      resize: vertical;
+      min-height: 130px;
     }
-    .btn{
-      flex:1;
-      padding:14px 12px;
-      border-radius:14px;
-      border:1px solid var(--stroke2);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      cursor:pointer;
-      font-weight:600;
-      font-size:15px;
-      text-align:center;
-      text-decoration:none;
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke2);
+      background: rgba(255, 255, 255, .05);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      text-align: center;
+      text-decoration: none;
       transition: background .15s ease, border-color .15s ease, transform .08s ease;
-      -webkit-tap-highlight-color:transparent;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      -webkit-tap-highlight-color: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-    .btn:active{ transform:scale(.99); }
-    .btnPrimary{
-      border-color:rgba(199,162,122,.80);
-      background:rgba(199,162,122,.14);
+
+    .btn:active {
+      transform: scale(.99);
     }
-    .btnPrimary:hover{
-      background:rgba(199,162,122,.18);
-      border-color:rgba(199,162,122,.92);
+
+    .btnPrimary {
+      border-color: rgba(199, 162, 122, .80);
+      background: rgba(199, 162, 122, .14);
     }
-    .btnGhost:hover{ background:rgba(255,255,255,.07); }
-    .status{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      margin-top:10px;
+
+    .btnPrimary:hover {
+      background: rgba(199, 162, 122, .18);
+      border-color: rgba(199, 162, 122, .92);
     }
-    .statusIcon{
-      width:42px;height:42px;
-      border-radius:999px;
-      border:1px solid rgba(199,162,122,.60);
-      background:rgba(199,162,122,.12);
-      color:var(--accent);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
+
+    .btnGhost:hover {
+      background: rgba(255, 255, 255, .07);
     }
-    .statusTitle{
-      font-family:"Bodoni Moda", serif;
-      font-size:20px;
-      font-weight:500;
-      margin-bottom:2px;
+
+    .status {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .04);
+      margin-top: 10px;
     }
-    .statusText{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.35;
+
+    .statusIcon {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(199, 162, 122, .60);
+      background: rgba(199, 162, 122, .12);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .statusTitle {
+      font-family: "Bodoni Moda", serif;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .statusText {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .reviewActions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .btnLarge {
+      padding: 18px 16px;
+      font-size: 17px;
     }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <div class="card" role="region" aria-label="Review and feedback">
       <header class="brand">
-        <img
-          class="logo"
-          alt="Bar Asra"
-          src="https://images.squarespace-cdn.com/content/v1/685cb45cdfc0481e70e9c3f8/bccb0815-ac3c-4929-b422-8fa170d14011/Bar+Asra+Logo+collection-09+%282%29.png?format=1500w"
-        />
+        <img class="logo" alt="Bar Asra"
+          src="https://images.squarespace-cdn.com/content/v1/685cb45cdfc0481e70e9c3f8/bccb0815-ac3c-4929-b422-8fa170d14011/Bar+Asra+Logo+collection-09+%282%29.png?format=1500w" />
       </header>
       <!-- Step: rating -->
       <section class="step" id="stepRating">
@@ -277,7 +377,8 @@
           </div>
           <label class="field">
             <span class="label">Your feedback</span>
-            <textarea class="input" name="message" rows="5" placeholder="Share your thoughts on the food, drinks, service, atmosphere..." required></textarea>
+            <textarea class="input" name="message" rows="5"
+              placeholder="Share your thoughts on the food, drinks, service, atmosphere..." required></textarea>
           </label>
           <input type="hidden" name="rating" id="ratingInput" value="" />
           <input type="hidden" name="page_url" id="pageUrlInput" value="" />
@@ -300,22 +401,43 @@
           <button class="btn btnPrimary" id="done">Done</button>
         </div>
       </section>
+      <!-- Step: 5-star google review prompt -->
+      <section class="step hidden" id="stepGoogleReview" aria-live="polite">
+        <div class="status">
+          <div class="statusIcon" aria-hidden="true">✓</div>
+          <div>
+            <div class="statusTitle">Thanks for your feedback!</div>
+            <div class="statusText">Leave a review for a chance to win a free dinner for two.</div>
+          </div>
+        </div>
+        <div class="reviewActions">
+          <a class="btn btnPrimary btnLarge" id="googleReviewBtn" href="#" target="_blank"
+            rel="noopener noreferrer">Leave Google Review</a>
+          <button class="btn btnGhost btnLarge" id="skipReview">No thanks</button>
+        </div>
+      </section>
     </div>
   </main>
   <script>
+    // ===== CONFIGURATION =====
+    // Replace with your Google Apps Script Web App URL after deployment
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
+
     const GOOGLE_REVIEW_URL_DEFAULT =
-      "https://www.google.com/search?sca_esv=b4f17e21de27e003&sxsrf=ANbL-n7yBmRQB18EDGeV8GQlwMI2EOp3yw:1771031888850&q=Bar+Asra&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSD3m_tkQlDwbv__aWj1umfZTu23bukw92bOCLnKh7Qn3GquH1H5yFZqzX4ybhk_L3NBIo6fhMN5-1DzzbcbvpGiVJ-z&sa=X&ved=2ahUKEwi8tvv059eSAxXGFjQIHYBTArMQrrQLegQIHRAA&biw=1512&bih=825&dpr=2#lrd=0x548673b8a6ce17fd:0xa890eac54074095a,3,,,,";
-    const FEEDBACK_ENDPOINT = ""; // Set your endpoint if needed
+      "https://www.google.com/search?q=Bar+Asra+reviews";
+
+    // Threshold: 5 stars go to Google, 1-4 stars go to feedback form
+    const GOOGLE_THRESHOLD = 5;
 
     const $ = (s) => document.querySelector(s);
-    function show(stepId){
-      ["#stepRating", "#stepFeedback", "#stepThanks"].forEach(id => $(id).classList.add("hidden"));
+    function show(stepId) {
+      ["#stepRating", "#stepFeedback", "#stepThanks", "#stepGoogleReview"].forEach(id => $(id).classList.add("hidden"));
       $(stepId).classList.remove("hidden");
     }
-    function getParam(name){
+    function getParam(name) {
       return new URL(window.location.href).searchParams.get(name);
     }
-    function sanitizeUrl(url){
+    function sanitizeUrl(url) {
       try {
         const u = new URL(url);
         if (!["http:", "https:"].includes(u.protocol)) return null;
@@ -329,7 +451,7 @@
     const hint = $("#ratingHint");
     let selectedRating = 0;
 
-    function makeRateButton(n){
+    function makeRateButton(n) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "rateBtn";
@@ -343,7 +465,7 @@
     }
     for (let i = 1; i <= 5; i++) ratingWrap.appendChild(makeRateButton(i));
 
-    function paint(rating){
+    function paint(rating) {
       const btns = [...document.querySelectorAll(".rateBtn")];
       btns.forEach((b) => {
         const active = Number(b.dataset.value) === rating;
@@ -351,13 +473,13 @@
         b.setAttribute("aria-checked", active ? "true" : "false");
       });
     }
-    function setMeta(rating){
+    function setMeta(rating) {
       $("#ratingInput").value = String(rating);
       $("#pageUrlInput").value = window.location.href;
       $("#timestampInput").value = new Date().toISOString();
     }
 
-    function reset(){
+    function reset() {
       selectedRating = 0;
       paint(0);
       hint.textContent = "";
@@ -365,16 +487,39 @@
       show("#stepRating");
     }
 
-    function onSelectRating(rating){
+    // Send rating to backend
+    async function sendRating(rating) {
+      if (!WEB_APP_URL || WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+        console.log("Rating (no endpoint):", rating);
+        return;
+      }
+      try {
+        await fetch(WEB_APP_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: "rating", rating: rating, source: "website" })
+        });
+      } catch (err) {
+        console.error("Failed to send rating:", err);
+      }
+    }
+
+    function onSelectRating(rating) {
       selectedRating = rating;
       paint(rating);
       setMeta(rating);
 
-        if (rating === 5) {
-      window.location.href = googleUrl;
-      return;
-        }
+      // Send rating to backend
+      sendRating(rating);
 
+      // Rating >= threshold goes to Google
+      if (rating >= GOOGLE_THRESHOLD) {
+        $("#googleReviewBtn").href = googleUrl;
+        show("#stepGoogleReview");
+        return;
+      }
+
+      // Lower ratings go to feedback form
       hint.textContent = "";
       show("#stepFeedback");
       setTimeout(() => {
@@ -385,7 +530,7 @@
 
     // keyboard support
     ratingWrap.addEventListener("keydown", (e) => {
-      const keys = ["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"];
+      const keys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
       if (!keys.includes(e.key)) return;
       e.preventDefault();
       const dir = (e.key === "ArrowLeft" || e.key === "ArrowUp") ? -1 : 1;
@@ -398,21 +543,31 @@
     // done (from thanks)
     $("#done").addEventListener("click", reset);
 
+    // skip google review
+    $("#skipReview").addEventListener("click", reset);
+
     // submit feedback
     $("#feedbackForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const form = e.currentTarget;
       const fd = new FormData(form);
       const msg = String(fd.get("message") || "").trim();
-      if (!msg){
+      if (!msg) {
         const ta = form.querySelector('textarea[name="message"]');
-        if (ta){ ta.focus(); ta.setAttribute("aria-invalid","true"); }
+        if (ta) { ta.focus(); ta.setAttribute("aria-invalid", "true"); }
         return;
       }
-      const payload = Object.fromEntries(fd.entries());
 
-      if (!FEEDBACK_ENDPOINT){
-        console.warn("No FEEDBACK_ENDPOINT set. Captured payload:", payload);
+      const payload = {
+        type: "feedback",
+        rating: selectedRating,
+        name: fd.get("name") || "",
+        contact: fd.get("contact") || "",
+        message: msg
+      };
+
+      if (!WEB_APP_URL || WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL") {
+        console.warn("No WEB_APP_URL set. Captured payload:", payload);
         show("#stepThanks");
         return;
       }
@@ -422,7 +577,7 @@
       btn.textContent = "Sending…";
       btn.disabled = true;
       try {
-        const res = await fetch(FEEDBACK_ENDPOINT, {
+        const res = await fetch(WEB_APP_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -444,4 +599,5 @@
     hint.textContent = "";
   </script>
 </body>
+
 </html>

@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>Bar Asra - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card-bg: #141414;
+      --border: #2a2a2a;
+      --text: #ffffff;
+      --text-muted: #888;
+      --accent: #C7A27A;
+      --accent-soft: rgba(199, 162, 122, 0.15);
+      --green: #4CAF50;
+      --red: #ef5350;
+      --yellow: #ffb74d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-family: "Bodoni Moda", serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    .last-updated {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: "Bodoni Moda", serif;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .feedback-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feedback-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .feedback-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .feedback-rating {
+      display: flex;
+      gap: 2px;
+    }
+
+    .star {
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    .star.empty { color: var(--border); }
+
+    .feedback-name {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .feedback-date {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .feedback-message {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rating-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .rating-bar-label {
+      width: 40px;
+      font-size: 14px;
+    }
+
+    .rating-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .rating-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .rating-bar-count {
+      width: 40px;
+      text-align: right;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Settings Panel */
+    .settings-panel {
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+
+    .settings-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .settings-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .settings-form {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .settings-form.open { display: block; }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #d4b08c;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .message {
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .message.success {
+      display: block;
+      background: rgba(76, 175, 80, 0.15);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+
+    .message.error {
+      display: block;
+      background: rgba(239, 83, 80, 0.15);
+      color: var(--red);
+      border: 1px solid var(--red);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+    }
+
+    .refresh-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .refresh-btn:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      header { flex-direction: column; gap: 10px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Bar Asra Dashboard</h1>
+        <p class="last-updated" id="lastUpdated">Loading...</p>
+      </div>
+      <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+    </header>
+
+    <div class="grid">
+      <div class="stat-card">
+        <div class="stat-value" id="todayCount">-</div>
+        <div class="stat-label">Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="weekCount">-</div>
+        <div class="stat-label">This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalCount">-</div>
+        <div class="stat-label">All Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="avgRating">-</div>
+        <div class="stat-label">Avg Rating</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Rating Distribution</h2>
+      <div id="distribution">
+        <div class="rating-bar">
+          <span class="rating-bar-label">5 ⭐</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" id="bar5" style="width: 0%"></div></div>
+          <span class="rating-bar-count" id="count5">0</span>
+        </div>
+        <div class="rating-bar">
+          <span class="rating-bar-label">4 ⭐</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" id="bar4" style="width: 0%"></div></div>
+          <span class="rating-bar-count" id="count4">0</span>
+        </div>
+        <div class="rating-bar">
+          <span class="rating-bar-label">3 ⭐</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" id="bar3" style="width: 0%"></div></div>
+          <span class="rating-bar-count" id="count3">0</span>
+        </div>
+        <div class="rating-bar">
+          <span class="rating-bar-label">2 ⭐</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" id="bar2" style="width: 0%"></div></div>
+          <span class="rating-bar-count" id="count2">0</span>
+        </div>
+        <div class="rating-bar">
+          <span class="rating-bar-label">1 ⭐</span>
+          <div class="rating-bar-track"><div class="rating-bar-fill" id="bar1" style="width: 0%"></div></div>
+          <span class="rating-bar-count" id="count1">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Recent Feedback</h2>
+      <div class="feedback-list" id="feedbackList">
+        <div class="loading">Loading feedback...</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <button class="settings-toggle" onclick="toggleSettings()">⚙️ Settings</button>
+      <div class="settings-form" id="settingsForm">
+        <div class="form-group">
+          <label>Admin Password</label>
+          <input type="password" id="adminPassword" placeholder="Enter password to change settings" />
+        </div>
+        <div class="form-group">
+          <label>Google Review URL</label>
+          <input type="text" id="googleUrl" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label>Google Threshold (4 or 5)</label>
+          <input type="number" id="threshold" min="1" max="5" />
+        </div>
+        <div class="form-group">
+          <label>Manager Email</label>
+          <input type="email" id="managerEmail" placeholder="email@example.com" />
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+        <div class="message" id="settingsMessage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== CONFIGURATION =====
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
+
+    async function loadData() {
+      if (WEB_APP_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+        document.getElementById('feedbackList').innerHTML =
+          '<div class="loading">⚠️ Please set WEB_APP_URL in the code</div>';
+        return;
+      }
+
+      try {
+        const res = await fetch(WEB_APP_URL + '?action=getData');
+        const data = await res.json();
+
+        // Update stats
+        document.getElementById('todayCount').textContent = data.stats.todayRatings;
+        document.getElementById('weekCount').textContent = data.stats.weekRatings;
+        document.getElementById('totalCount').textContent = data.stats.totalRatings;
+        document.getElementById('avgRating').textContent = data.stats.avgRating;
+
+        // Update last updated
+        const date = new Date(data.lastUpdated);
+        document.getElementById('lastUpdated').textContent =
+          'Updated: ' + date.toLocaleTimeString();
+
+        // Update distribution
+        const dist = data.stats.distribution;
+        const total = data.stats.totalRatings || 1;
+        for (let i = 1; i <= 5; i++) {
+          const pct = (dist[i] / total) * 100;
+          document.getElementById('bar' + i).style.width = pct + '%';
+          document.getElementById('count' + i).textContent = dist[i];
+        }
+
+        // Update feedback list
+        const list = document.getElementById('feedbackList');
+        if (data.recentFeedback.length === 0) {
+          list.innerHTML = '<div class="loading">No feedback yet</div>';
+        } else {
+          list.innerHTML = data.recentFeedback.map(f => `
+            <div class="feedback-item">
+              <div class="feedback-header">
+                <div>
+                  <div class="feedback-rating">
+                    ${renderStars(f.rating)}
+                  </div>
+                  <span class="feedback-name">${escapeHtml(f.name)}</span>
+                </div>
+                <span class="feedback-date">${f.date || ''}</span>
+              </div>
+              ${f.message ? `<p class="feedback-message">${escapeHtml(f.message)}</p>` : ''}
+            </div>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('feedbackList').innerHTML =
+          '<div class="loading">Error loading data</div>';
+      }
+    }
+
+    function renderStars(rating) {
+      let html = '';
+      for (let i = 1; i <= 5; i++) {
+        html += `<span class="star ${i <= rating ? '' : 'empty'}">★</span>`;
+      }
+      return html;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function toggleSettings() {
+      document.getElementById('settingsForm').classList.toggle('open');
+    }
+
+    async function saveSettings() {
+      const password = document.getElementById('adminPassword').value;
+      const googleUrl = document.getElementById('googleUrl').value;
+      const threshold = document.getElementById('threshold').value;
+      const email = document.getElementById('managerEmail').value;
+
+      const msg = document.getElementById('settingsMessage');
+
+      if (!password) {
+        msg.className = 'message error';
+        msg.textContent = 'Please enter admin password';
+        return;
+      }
+
+      try {
+        const params = new URLSearchParams({
+          action: 'updateSettings',
+          password: password
+        });
+        if (googleUrl) params.append('googleUrl', googleUrl);
+        if (threshold) params.append('threshold', threshold);
+        if (email) params.append('email', email);
+
+        const res = await fetch(WEB_APP_URL + '?' + params);
+        const data = await res.json();
+
+        if (data.success) {
+          msg.className = 'message success';
+          msg.textContent = 'Settings saved!';
+        } else {
+          msg.className = 'message error';
+          msg.textContent = data.message || 'Error saving settings';
+        }
+      } catch (err) {
+        msg.className = 'message error';
+        msg.textContent = 'Error connecting to server';
+      }
+    }
+
+    // Load on start
+    loadData();
+  </script>
+</body>
+</html>
