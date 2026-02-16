@@ -352,7 +352,8 @@ function _setSetting(k,v){const ss=SpreadsheetApp.getActiveSpreadsheet(); let s=
 function _publicSettings(){return {
   googleReviewUrl:_getSetting("googleReviewUrl")||CONFIG.defaultGoogleUrl,
   googleThreshold:parseInt(_getSetting("googleThreshold"))||CONFIG.defaultThreshold,
-  competitionPrize:_getSetting("competitionPrize")||CONFIG.competitionPrize};}
+  competitionPrize:_getSetting("competitionPrize")||CONFIG.competitionPrize,
+  managerEmail:_getSetting("managerEmail")||CONFIG.managerEmail};}
 
 function _handleSettings(p){
   if(p.password!==CONFIG.adminPassword) return {success:false,message:"Invalid password"};
