@@ -236,60 +236,99 @@ function sendDailyDigest() {
 
 
 // ═════════════════════════════════════════════════════════════
-//  DASHBOARD DATA
+//  DASHBOARD DATA — GM Focused
 // ═════════════════════════════════════════════════════════════
 
 function _buildDashboard() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const raw = ss.getSheetByName("Raw Data"), fb = ss.getSheetByName("Feedback"), comp = ss.getSheetByName("Competition");
+  const fb = ss.getSheetByName("Feedback"), comp = ss.getSheetByName("Competition"), raw = ss.getSheetByName("Raw Data");
   const now = new Date(), tz = Session.getScriptTimeZone();
   const todayStr = Utilities.formatDate(now, tz, "yyyy-MM-dd");
-  const weekAgo = new Date(now.getTime()-7*86400000), monthAgo = new Date(now.getTime()-30*86400000), prevWeek = new Date(now.getTime()-14*86400000);
+  const weekAgo = new Date(now.getTime()-7*86400000), monthAgo = new Date(now.getTime()-30*86400000);
 
-  const rawRows = raw && raw.getLastRow()>1 ? raw.getRange(2,1,raw.getLastRow()-1,6).getValues() : [];
-  let total=0, today=0, week=0, month=0, prevWk=0, sumAll=0, sumWeek=0, sumPrev=0, googleRouted=0;
-  const dist={1:0,2:0,3:0,4:0,5:0}, dailyC={}, dailyS={}, hourly=new Array(24).fill(0);
-  const dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const dow={}; dayNames.forEach(d=>dow[d]=0);
-
-  for (const row of rawRows) {
-    const r=parseInt(row[1])||0; if(r<1||r>5) continue;
-    const rd=new Date(row[0]), ds=row[3]||Utilities.formatDate(rd,tz,"yyyy-MM-dd"), src=row[2]||"", dn=row[5]||dayNames[rd.getDay()];
-    total++; sumAll+=r; dist[r]++;
-    if(ds===todayStr) today++;
-    if(rd>=weekAgo){week++;sumWeek+=r;} if(rd>=monthAgo) month++;
-    if(rd>=prevWeek&&rd<weekAgo){prevWk++;sumPrev+=r;}
-    if(src==="competition_google") googleRouted++;
-    if(rd>=monthAgo){dailyC[ds]=(dailyC[ds]||0)+1;dailyS[ds]=(dailyS[ds]||0)+r;}
-    const h=rd.getHours(); if(!isNaN(h)) hourly[h]++;
-    if(dow[dn]!==undefined) dow[dn]++;
+  // Feedback data (actual customer submissions, not every star tap)
+  const fbRows = fb && fb.getLastRow()>1 ? fb.getRange(2,1,fb.getLastRow()-1,7).getValues() : [];
+  let fbTotal=0, fbToday=0, fbWeek=0, fbMonth=0, fbSum=0, fbWeekSum=0, unreadCount=0, needsAttention=0;
+  const dist={1:0,2:0,3:0,4:0,5:0}, recentFb=[];
+  
+  for(let i=fbRows.length-1;i>=0;i--){
+    const r=fbRows[i];
+    const rating=parseInt(r[1])||0;
+    const dateStr=r[5]||"";
+    const status=r[6]||"New";
+    const rd=new Date(r[0]);
+    
+    if(rating<1||rating>5) continue;
+    fbTotal++; fbSum+=rating; dist[rating]++;
+    if(dateStr===todayStr) fbToday++;
+    if(rd>=weekAgo){fbWeek++; fbWeekSum+=rating;}
+    if(rd>=monthAgo) fbMonth++;
+    if(status==="New") unreadCount++;
+    if(rating<=2 && status==="New") needsAttention++;
+    
+    if(recentFb.length<30){
+      recentFb.push({rating:rating,name:r[2]||"Anonymous",contact:r[3]||"",message:r[4]||"",date:dateStr,status:status});
+    }
   }
 
-  const trend=[];
-  for(let i=29;i>=0;i--){const d=new Date(now.getTime()-i*86400000),k=Utilities.formatDate(d,tz,"yyyy-MM-dd");
-    trend.push({date:k,label:Utilities.formatDate(d,tz,"MMM dd"),count:dailyC[k]||0,avg:dailyC[k]?((dailyS[k]||0)/dailyC[k]).toFixed(1):null});}
+  // Competition entries
+  const compRows = comp && comp.getLastRow()>1 ? comp.getRange(2,1,comp.getLastRow()-1,5).getValues() : [];
+  const compEntries=[]; let totalComp=0, todayComp=0, compWeek=0, compMonth=0;
+  for(let i=compRows.length-1;i>=0;i--){
+    const r=compRows[i], d=r[3]||"", rd=new Date(r[0]);
+    totalComp++; 
+    if(d===todayStr) todayComp++;
+    if(rd>=weekAgo) compWeek++;
+    if(rd>=monthAgo) compMonth++;
+    if(compEntries.length<50) compEntries.push({name:r[1]||"",email:r[2]||"",date:d,clicked:r[4]||""});
+  }
 
-  const weekChange=prevWk>0?Math.round(((week-prevWk)/prevWk)*100):(week>0?100:0);
-  const avgWk=week>0?(sumWeek/week).toFixed(2):0, avgPv=prevWk>0?(sumPrev/prevWk).toFixed(2):0;
-  const avgChange=prevWk>0?Math.round((avgWk-avgPv)/avgPv*100):0;
-  const fiveTotal=dist[5]||0, convRate=fiveTotal>0?Math.round((googleRouted/fiveTotal)*100):0;
+  // Raw data for Google conversion tracking only
+  const rawRows = raw && raw.getLastRow()>1 ? raw.getRange(2,1,raw.getLastRow()-1,6).getValues() : [];
+  let googleRouted=0, fiveStarTaps=0;
+  for(const row of rawRows){
+    const src=row[2]||"", rating=parseInt(row[1])||0;
+    if(src==="competition_google") googleRouted++;
+    if(rating===5) fiveStarTaps++;
+  }
 
-  const fbRows=fb&&fb.getLastRow()>1?fb.getRange(2,1,fb.getLastRow()-1,7).getValues():[];
-  const recentFb=[]; for(let i=fbRows.length-1;i>=Math.max(0,fbRows.length-30);i--){
-    const r=fbRows[i]; recentFb.push({rating:r[1],name:r[2]||"Anonymous",contact:r[3]||"",message:r[4]||"",date:r[5]||"",status:r[6]||"New"});}
-
-  const compRows=comp&&comp.getLastRow()>1?comp.getRange(2,1,comp.getLastRow()-1,5).getValues():[];
-  const compEntries=[]; let totalComp=0, todayComp=0;
-  for(let i=compRows.length-1;i>=0;i--){const r=compRows[i],d=r[3]||""; totalComp++; if(d===todayStr) todayComp++;
-    if(compEntries.length<50) compEntries.push({name:r[1]||"",email:r[2]||"",date:d,clicked:r[4]||""});}
-
+  // GM Key Metrics
+  const avgRating = fbTotal>0 ? (fbSum/fbTotal).toFixed(2) : "0";
+  const avgWeek = fbWeek>0 ? (fbWeekSum/fbWeek).toFixed(2) : "0";
+  const googleConvRate = fiveStarTaps>0 ? Math.round((googleRouted/fiveStarTaps)*100) : 0;
+  const totalInteractions = fbTotal + totalComp;
+  
   return {
-    stats:{totalRatings:total,todayRatings:today,weekRatings:week,monthRatings:month,
-      avgRating:total>0?(sumAll/total).toFixed(2):"0",avgWeekRating:avgWk,weekChange,avgChange,
-      distribution:dist,googleRouted,fiveStarCount:fiveTotal,googleConversion:convRate},
-    dailyTrend:trend, hourly, dayOfWeek:dow, recentFeedback:recentFb,
-    compEntries, totalCompEntries:totalComp, todayCompEntries:todayComp,
-    lastUpdated:now.toISOString(),
+    stats:{
+      // Key GM Metrics
+      totalFeedback: fbTotal,
+      todayFeedback: fbToday,
+      weekFeedback: fbWeek,
+      monthFeedback: fbMonth,
+      avgRating: avgRating,
+      avgWeekRating: avgWeek,
+      
+      // Action items
+      unreadCount: unreadCount,
+      needsAttention: needsAttention, // 1-2 star + unread
+      
+      // Competition
+      totalCompEntries: totalComp,
+      todayCompEntries: todayComp,
+      weekCompEntries: compWeek,
+      monthCompEntries: compMonth,
+      
+      // Google conversion
+      fiveStarTaps: fiveStarTaps,
+      googleRouted: googleRouted,
+      googleConversion: googleConvRate,
+      
+      // Distribution (from actual feedback, not taps)
+      distribution: dist,
+    },
+    recentFeedback: recentFb,
+    compEntries: compEntries,
+    lastUpdated: now.toISOString(),
   };
 }
 

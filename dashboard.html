@@ -840,68 +840,55 @@
     <div class="tab-panel active" id="panelOverview">
       <div class="kpi-grid">
         <div class="kpi">
-          <div class="kpi-label">Today</div>
+          <div class="kpi-label">Feedback Today</div>
           <div class="kpi-val" id="kToday">0</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">This Week</div>
           <div class="kpi-val" id="kWeek">0</div>
-          <div class="kpi-badge flat" id="kWeekBadge" style="display:none"></div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-label">This Month</div>
-          <div class="kpi-val" id="kMonth">0</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Avg Rating</div>
           <div class="kpi-val gold" id="kAvg">—</div>
-          <div class="kpi-badge flat" id="kAvgBadge" style="display:none"></div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">All Time</div>
-          <div class="kpi-val" id="kTotal">0</div>
+          <div class="kpi-label">Needs Attention 🚨</div>
+          <div class="kpi-val" id="kAttention" style="color:var(--red)">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Comp Entries Today</div>
+          <div class="kpi-val" id="kCompToday">0</div>
         </div>
       </div>
 
       <div class="charts-row">
         <div class="panel">
-          <div class="panel-hdr"><span class="panel-title">30-Day Trend</span><span class="panel-tag">Volume +
-              Avg</span></div>
-          <div class="chart-wrap"><canvas id="cTrend"></canvas></div>
-        </div>
-        <div class="panel">
-          <div class="panel-hdr"><span class="panel-title">Distribution</span><span class="panel-tag" id="distTag">0
-              total</span></div>
+          <div class="panel-hdr"><span class="panel-title">Rating Distribution</span><span class="panel-tag" id="distTag">0
+              feedback</span></div>
           <div id="distBars"></div>
         </div>
-      </div>
-
-      <div class="secondary-row">
         <div class="panel">
-          <div class="panel-hdr"><span class="panel-title">Busiest Hours</span><span class="panel-tag">By ratings</span>
+          <div class="panel-hdr"><span class="panel-title">Recent Feedback</span><span class="panel-tag">Last 30</span></div>
+          <div id="recentFbList" style="max-height: 210px; overflow-y: auto;">
+            <div class="empty" style="padding: 40px;">Loading…</div>
           </div>
-          <div class="chart-sm"><canvas id="cHourly"></canvas></div>
-        </div>
-        <div class="panel">
-          <div class="panel-hdr"><span class="panel-title">Day of Week</span><span class="panel-tag">Volume</span></div>
-          <div class="chart-sm"><canvas id="cDow"></canvas></div>
         </div>
       </div>
 
       <div class="funnel">
         <div class="funnel-stat">
           <h3 id="fun5">0</h3>
-          <p>5-Star Taps</p>
+          <p>5-Star Customers</p>
         </div>
         <div class="funnel-arrow">→</div>
         <div class="funnel-stat">
           <h3 id="funComp">0</h3>
-          <p>Entered Competition</p>
+          <p>Competition Entries</p>
         </div>
         <div class="funnel-arrow">→</div>
         <div class="funnel-stat">
           <h3 id="funRate">0%</h3>
-          <p>Google Conversion</p>
+          <p>Left Google Review</p>
         </div>
       </div>
     </div>
@@ -909,9 +896,10 @@
     <!-- TAB: FEEDBACK -->
     <div class="tab-panel" id="panelFeedback">
       <div class="filter-bar">
-        <span class="panel-title">Private Feedback</span>
+        <span class="panel-title">Private Feedback — <span id="fbUnread" style="color:var(--amber)">0 unread</span></span>
         <div class="pills">
           <button class="pill active" onclick="setFilter('all',this)">All</button>
+          <button class="pill" onclick="setFilter('needs-attention',this)">🚨 Needs Attention</button>
           <button class="pill" onclick="setFilter('1',this)">1★</button>
           <button class="pill" onclick="setFilter('2',this)">2★</button>
           <button class="pill" onclick="setFilter('3',this)">3★</button>
@@ -928,6 +916,24 @@
       <div class="filter-bar">
         <span class="panel-title">Dinner for Two — Entries</span>
         <span class="panel-tag" id="compCount">0 entries</span>
+      </div>
+      <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+        <div class="kpi" style="padding: 14px;">
+          <div class="kpi-label">Today</div>
+          <div class="kpi-val" id="compToday">0</div>
+        </div>
+        <div class="kpi" style="padding: 14px;">
+          <div class="kpi-label">This Week</div>
+          <div class="kpi-val" id="compWeek">0</div>
+        </div>
+        <div class="kpi" style="padding: 14px;">
+          <div class="kpi-label">This Month</div>
+          <div class="kpi-val" id="compMonth">0</div>
+        </div>
+        <div class="kpi" style="padding: 14px;">
+          <div class="kpi-label">Total</div>
+          <div class="kpi-val gold" id="compTotal">0</div>
+        </div>
       </div>
       <div class="entry-hdr"><span>Name</span><span>Email</span><span style="text-align:right">Date</span></div>
       <div id="compList">
@@ -1042,9 +1048,7 @@
       if (!DATA || !DATA.stats) return;
       try { renderKPIs(); } catch (e) { console.error("renderKPIs:", e); }
       try { renderDist(); } catch (e) { console.error("renderDist:", e); }
-      try { renderTrend(); } catch (e) { console.error("renderTrend:", e); }
-      try { renderHourly(); } catch (e) { console.error("renderHourly:", e); }
-      try { renderDow(); } catch (e) { console.error("renderDow:", e); }
+      try { renderRecentFb(); } catch (e) { console.error("renderRecentFb:", e); }
       try { renderFunnel(); } catch (e) { console.error("renderFunnel:", e); }
       try { renderFeedback(); } catch (e) { console.error("renderFeedback:", e); }
       try { renderComp(); } catch (e) { console.error("renderComp:", e); }
@@ -1056,14 +1060,11 @@
 
     function renderKPIs() {
       var s = DATA.stats;
-      document.getElementById("kToday").textContent = s.todayRatings || 0;
-      document.getElementById("kWeek").textContent = s.weekRatings || 0;
-      document.getElementById("kMonth").textContent = s.monthRatings || 0;
+      document.getElementById("kToday").textContent = s.todayFeedback || 0;
+      document.getElementById("kWeek").textContent = s.weekFeedback || 0;
       document.getElementById("kAvg").textContent = s.avgRating || "—";
-      document.getElementById("kTotal").textContent = (s.totalRatings || 0).toLocaleString();
-
-      setBadge("kWeekBadge", s.weekChange, "% vs prev week");
-      setBadge("kAvgBadge", s.avgChange, "% avg WoW");
+      document.getElementById("kAttention").textContent = s.needsAttention || 0;
+      document.getElementById("kCompToday").textContent = s.todayCompEntries || 0;
     }
 
     function setBadge(id, val, suffix) {
@@ -1081,8 +1082,8 @@
 
     function renderDist() {
       var d = DATA.stats.distribution || { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-      var t = DATA.stats.totalRatings || 0;
-      document.getElementById("distTag").textContent = t + " total";
+      var t = DATA.stats.totalFeedback || 0;
+      document.getElementById("distTag").textContent = t + " feedback submissions";
 
       var c = document.getElementById("distBars");
       c.innerHTML = "";
@@ -1266,8 +1267,8 @@
 
     function renderFunnel() {
       var s = DATA.stats || {};
-      document.getElementById("fun5").textContent = s.fiveStarCount || 0;
-      document.getElementById("funComp").textContent = DATA.totalCompEntries || 0;
+      document.getElementById("fun5").textContent = s.fiveStarTaps || 0;
+      document.getElementById("funComp").textContent = s.totalCompEntries || 0;
       document.getElementById("funRate").textContent = (s.googleConversion || 0) + "%";
     }
 
@@ -1275,13 +1276,55 @@
     //  FEEDBACK
     // ═══════════════════════════════════════════════════════════
 
+    function renderRecentFb() {
+      var list = document.getElementById("recentFbList");
+      var all = DATA.recentFeedback || [];
+      var recent = all.slice(0, 5); // Show last 5 on overview
+      
+      if (recent.length === 0) {
+        list.innerHTML = '<div class="empty" style="padding: 40px;">No feedback yet</div>';
+        return;
+      }
+
+      var html = "";
+      for (var i = 0; i < recent.length; i++) {
+        var f = recent[i];
+        var stars = "";
+        for (var s = 0; s < 5; s++) {
+          stars += '<span class="' + (s < f.rating ? "on" : "off") + '">★</span>';
+        }
+        var needsAttn = f.rating <= 2 && f.status === "New";
+        html +=
+          '<div class="fb-item" style="margin-bottom: 8px; padding: 12px; ' + (needsAttn ? 'border-left:3px solid var(--red);' : '') + '">' +
+          '<div class="fb-top" style="margin-bottom: 4px;">' +
+          '<div class="fb-left">' +
+          '<div class="fb-stars">' + stars + '</div>' +
+          '<span class="fb-name" style="font-size: 12px;">' + esc(f.name) + '</span>' +
+          '</div>' +
+          '<span class="fb-date" style="font-size: 10px;">' + (f.date || '') + '</span>' +
+          '</div>' +
+          (f.message ? '<div class="fb-msg" style="font-size: 12px; line-height: 1.4;">' + esc(f.message.substring(0, 80)) + (f.message.length > 80 ? '...' : '') + '</div>' : '') +
+          '</div>';
+      }
+      list.innerHTML = html;
+    }
+
     function renderFeedback() {
       var list = document.getElementById("fbList");
       var all = DATA.recentFeedback || [];
+      
+      // Update unread count
+      var unread = DATA.stats.unreadCount || 0;
+      document.getElementById("fbUnread").textContent = unread + " unread";
 
-      var fb = currentFilter === "all"
-        ? all
-        : all.filter(function (f) { return String(f.rating) === currentFilter; });
+      var fb;
+      if (currentFilter === "all") {
+        fb = all;
+      } else if (currentFilter === "needs-attention") {
+        fb = all.filter(function (f) { return f.rating <= 2 && f.status === "New"; });
+      } else {
+        fb = all.filter(function (f) { return String(f.rating) === currentFilter; });
+      }
 
       if (fb.length === 0) {
         list.innerHTML = '<div class="empty">No feedback yet. Feedback from 1-4 star ratings will appear here.</div>';
@@ -1295,8 +1338,9 @@
         for (var s = 0; s < 5; s++) {
           stars += '<span class="' + (s < f.rating ? "on" : "off") + '">★</span>';
         }
+        var needsAttn = f.rating <= 2 && f.status === "New";
         html +=
-          '<div class="fb-item">' +
+          '<div class="fb-item" style="' + (needsAttn ? 'border-left:3px solid var(--red);' : '') + '">' +
           '<div class="fb-top">' +
           '<div class="fb-left">' +
           '<div class="fb-stars">' + stars + '</div>' +
@@ -1306,7 +1350,7 @@
           '<span class="fb-date">' + (f.date || '') + '</span>' +
           '</div>' +
           (f.message ? '<div class="fb-msg">' + esc(f.message) + '</div>' : '') +
-          '<span class="fb-badge ' + (f.status || "new").toLowerCase() + '">' + (f.status || "New") + '</span>' +
+          '<span class="fb-badge ' + (f.status || "new").toLowerCase() + '">' + (needsAttn ? '🚨 ' : '') + (f.status || "New") + '</span>' +
           '</div>';
       }
       list.innerHTML = html;
@@ -1325,7 +1369,13 @@
     // ═══════════════════════════════════════════════════════════
 
     function renderComp() {
-      document.getElementById("compCount").textContent = (DATA.totalCompEntries || 0) + " entries";
+      var s = DATA.stats || {};
+      document.getElementById("compCount").textContent = (s.totalCompEntries || 0) + " entries";
+      document.getElementById("compToday").textContent = s.todayCompEntries || 0;
+      document.getElementById("compWeek").textContent = s.weekCompEntries || 0;
+      document.getElementById("compMonth").textContent = s.monthCompEntries || 0;
+      document.getElementById("compTotal").textContent = s.totalCompEntries || 0;
+      
       var list = document.getElementById("compList");
       var entries = DATA.compEntries || [];
 
