@@ -806,6 +806,20 @@
 </head>
 
 <body>
+  <!-- ═══════════════════════════════════════════════════════════
+       PASSWORD GATE
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="passwordGate" style="position:fixed; inset:0; background:var(--bg); z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:48px; max-width:360px; width:90%; text-align:center;">
+      <img src="https://images.squarespace-cdn.com/content/v1/685cb45cdfc0481e70e9c3f8/ddc6ccac-de6d-403d-a969-b9a445c3acc9/bar-asra-cocktail-lounge-and-restaurant-top-dining-vancouver-bc-south-granville.png?format=300w" alt="Bar Asra" style="height:60px; margin-bottom:24px; filter:brightness(1.1);" />
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--cream); margin-bottom:8px;">Review Intelligence</h2>
+      <p style="font-size:13px; color:var(--text-soft); margin-bottom:24px;">Enter password to access dashboard</p>
+      <input type="password" id="gatePassword" placeholder="Password" style="width:100%; padding:14px 16px; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; color:var(--text); font-family:inherit; font-size:15px; outline:none; margin-bottom:12px;" onkeypress="if(event.key==='Enter')checkPassword()" />
+      <button onclick="checkPassword()" style="width:100%; padding:14px; background:var(--gold); color:var(--bg); border:none; border-radius:12px; font-family:inherit; font-size:15px; font-weight:600; cursor:pointer;">Access Dashboard</button>
+      <p id="gateError" style="color:var(--red); font-size:12px; margin-top:12px; display:none;">Incorrect password</p>
+    </div>
+  </div>
+
   <div class="shell">
 
     <!-- Header -->
@@ -1517,11 +1531,40 @@
     }
 
     // ═══════════════════════════════════════════════════════════
+    //  PASSWORD GATE
+    // ═══════════════════════════════════════════════════════════
+
+    const DASHBOARD_PASSWORD = "barasra2024";
+
+    function checkPassword() {
+      var input = document.getElementById("gatePassword").value;
+      if (input === DASHBOARD_PASSWORD) {
+        sessionStorage.setItem("barasra_auth", "1");
+        document.getElementById("passwordGate").style.display = "none";
+        loadData();
+      } else {
+        document.getElementById("gateError").style.display = "block";
+        document.getElementById("gatePassword").value = "";
+        document.getElementById("gatePassword").focus();
+      }
+    }
+
+    function initGate() {
+      if (sessionStorage.getItem("barasra_auth") === "1") {
+        document.getElementById("passwordGate").style.display = "none";
+        return true;
+      }
+      return false;
+    }
+
+    // ═══════════════════════════════════════════════════════════
     //  INIT
     // ═══════════════════════════════════════════════════════════
 
-    loadData();
-    setInterval(loadData, 60000);
+    if (initGate()) {
+      loadData();
+      setInterval(loadData, 60000);
+    }
   </script>
 </body>
 
