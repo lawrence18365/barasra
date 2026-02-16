@@ -40,7 +40,7 @@
     *::after {
       box-sizing: border-box;
       margin: 0;
-      padding: 0;
+      padding: 0
     }
 
     body {
@@ -49,10 +49,9 @@
       font-family: "Outfit", system-ui, sans-serif;
       font-weight: 400;
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased
     }
 
-    /* Noise overlay */
     body::after {
       content: "";
       position: fixed;
@@ -60,7 +59,7 @@
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
-      opacity: 0.6;
+      opacity: 0.6
     }
 
     .shell {
@@ -68,30 +67,30 @@
       z-index: 1;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 28px 24px 80px;
+      padding: 28px 24px 80px
     }
 
-    /* ═══ HEADER ═══ */
+    /* Header */
     .hdr {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 32px;
       padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border)
     }
 
     .hdr-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 16px
     }
 
     .hdr-logo {
       height: 44px;
       width: auto;
       object-fit: contain;
-      filter: brightness(1.1);
+      filter: brightness(1.1)
     }
 
     .hdr-text h1 {
@@ -99,7 +98,7 @@
       font-size: 22px;
       font-weight: 400;
       color: var(--cream);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.02em
     }
 
     .hdr-status {
@@ -108,7 +107,7 @@
       margin-top: 2px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 5px
     }
 
     .dot {
@@ -116,24 +115,24 @@
       height: 6px;
       border-radius: 50%;
       background: var(--green);
-      animation: pulse 2s ease infinite;
+      animation: pulse 2s ease infinite
     }
 
     @keyframes pulse {
 
       0%,
       100% {
-        opacity: 1;
+        opacity: 1
       }
 
       50% {
-        opacity: 0.3;
+        opacity: 0.3
       }
     }
 
     .hdr-actions {
       display: flex;
-      gap: 6px;
+      gap: 6px
     }
 
     .icon-btn {
@@ -149,15 +148,15 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
-      font-family: inherit;
+      font-family: inherit
     }
 
     .icon-btn:hover {
       border-color: var(--gold-mid);
-      color: var(--gold);
+      color: var(--gold)
     }
 
-    /* ═══ TABS ═══ */
+    /* Tabs */
     .tabs {
       display: flex;
       gap: 4px;
@@ -166,7 +165,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 4px;
-      width: fit-content;
+      width: fit-content
     }
 
     .tab {
@@ -179,43 +178,43 @@
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s
     }
 
     .tab:hover {
-      color: var(--text-2);
+      color: var(--text-2)
     }
 
     .tab.active {
       background: var(--surface-2);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .tab-panel {
-      display: none;
+      display: none
     }
 
     .tab-panel.active {
       display: block;
-      animation: fadeIn 0.3s;
+      animation: fadeIn 0.3s
     }
 
     @keyframes fadeIn {
       from {
-        opacity: 0;
+        opacity: 0
       }
 
       to {
-        opacity: 1;
+        opacity: 1
       }
     }
 
-    /* ═══ KPI GRID ═══ */
+    /* KPIs */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 24px
     }
 
     .kpi {
@@ -224,7 +223,7 @@
       border-radius: var(--radius);
       padding: 20px 16px;
       position: relative;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .kpi::before {
@@ -236,11 +235,11 @@
       height: 2px;
       background: var(--gold);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.3s
     }
 
     .kpi:hover::before {
-      opacity: 1;
+      opacity: 1
     }
 
     .kpi-label {
@@ -249,7 +248,7 @@
       color: var(--text-soft);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .kpi-val {
@@ -257,11 +256,11 @@
       font-size: 34px;
       font-weight: 500;
       color: var(--text);
-      line-height: 1;
+      line-height: 1
     }
 
     .kpi-val.gold {
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .kpi-badge {
@@ -272,44 +271,44 @@
       font-weight: 600;
       margin-top: 6px;
       padding: 2px 8px;
-      border-radius: 6px;
+      border-radius: 6px
     }
 
     .kpi-badge.up {
       color: var(--green);
-      background: var(--green-bg);
+      background: var(--green-bg)
     }
 
     .kpi-badge.down {
       color: var(--red);
-      background: var(--red-bg);
+      background: var(--red-bg)
     }
 
     .kpi-badge.flat {
       color: var(--text-soft);
-      background: var(--gold-dim);
+      background: var(--gold-dim)
     }
 
-    /* ═══ PANELS ═══ */
+    /* Panels */
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 20px;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .panel-hdr {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .panel-title {
       font-size: 14px;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text)
     }
 
     .panel-tag {
@@ -317,39 +316,39 @@
       color: var(--text-soft);
       background: var(--surface-2);
       padding: 3px 10px;
-      border-radius: 6px;
+      border-radius: 6px
     }
 
     .charts-row {
       display: grid;
       grid-template-columns: 5fr 3fr;
       gap: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .chart-wrap {
       position: relative;
-      height: 210px;
+      height: 210px
     }
 
     .chart-sm {
       position: relative;
-      height: 165px;
+      height: 165px
     }
 
     .secondary-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
-    /* ═══ DISTRIBUTION BARS ═══ */
+    /* Distribution */
     .dist-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .dist-lbl {
@@ -357,7 +356,7 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text-2);
-      text-align: right;
+      text-align: right
     }
 
     .dist-track {
@@ -365,50 +364,50 @@
       height: 9px;
       background: var(--surface-3);
       border-radius: 5px;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .dist-fill {
       height: 100%;
       border-radius: 5px;
-      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1)
     }
 
     .dist-fill.s5 {
-      background: var(--gold);
+      background: var(--gold)
     }
 
     .dist-fill.s4 {
-      background: #b8c97e;
+      background: #b8c97e
     }
 
     .dist-fill.s3 {
-      background: var(--amber);
+      background: var(--amber)
     }
 
     .dist-fill.s2 {
-      background: #e88a64;
+      background: #e88a64
     }
 
     .dist-fill.s1 {
-      background: var(--red);
+      background: var(--red)
     }
 
     .dist-ct {
       width: 32px;
       font-size: 12px;
       color: var(--text-soft);
-      text-align: right;
+      text-align: right
     }
 
     .dist-pct {
       width: 36px;
       font-size: 10px;
       color: var(--text-soft);
-      text-align: right;
+      text-align: right
     }
 
-    /* ═══ FUNNEL ═══ */
+    /* Funnel */
     .funnel {
       display: grid;
       grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -419,39 +418,39 @@
       margin-bottom: 16px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--radius)
     }
 
     .funnel-stat h3 {
       font-family: "Cormorant Garamond", serif;
       font-size: 38px;
       font-weight: 500;
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .funnel-stat p {
       font-size: 11px;
       color: var(--text-soft);
-      margin-top: 2px;
+      margin-top: 2px
     }
 
     .funnel-arrow {
       color: var(--gold-mid);
-      font-size: 20px;
+      font-size: 20px
     }
 
-    /* ═══ FEEDBACK / ENTRIES LIST ═══ */
+    /* Feedback */
     .filter-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 16px
     }
 
     .pills {
       display: flex;
       gap: 5px;
-      flex-wrap: wrap;
+      flex-wrap: wrap
     }
 
     .pill {
@@ -464,18 +463,18 @@
       font-size: 11px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s
     }
 
     .pill:hover {
       border-color: var(--gold-mid);
-      color: var(--text-2);
+      color: var(--text-2)
     }
 
     .pill.active {
       background: var(--gold-dim);
       border-color: var(--gold-mid);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .fb-item {
@@ -484,61 +483,61 @@
       border-radius: 12px;
       padding: 16px 18px;
       margin-bottom: 10px;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s
     }
 
     .fb-item:hover {
-      border-color: var(--border-lt);
+      border-color: var(--border-lt)
     }
 
     .fb-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 6px;
+      margin-bottom: 6px
     }
 
     .fb-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 8px
     }
 
     .fb-stars {
       display: flex;
       gap: 1px;
-      font-size: 12px;
+      font-size: 12px
     }
 
     .fb-stars .on {
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .fb-stars .off {
-      color: var(--border);
+      color: var(--border)
     }
 
     .fb-name {
       font-weight: 600;
       font-size: 13px;
-      color: var(--text);
+      color: var(--text)
     }
 
     .fb-contact {
       font-size: 11px;
-      color: var(--text-soft);
+      color: var(--text-soft)
     }
 
     .fb-date {
       font-size: 10px;
-      color: var(--text-soft);
+      color: var(--text-soft)
     }
 
     .fb-msg {
       font-size: 13px;
       color: var(--text-2);
       line-height: 1.6;
-      margin-top: 4px;
+      margin-top: 4px
     }
 
     .fb-badge {
@@ -549,27 +548,27 @@
       letter-spacing: 0.05em;
       padding: 2px 8px;
       border-radius: 4px;
-      margin-top: 6px;
+      margin-top: 6px
     }
 
     .fb-badge.new {
       color: var(--amber);
-      background: rgba(232, 168, 76, 0.12);
+      background: rgba(232, 168, 76, 0.12)
     }
 
     .fb-badge.read {
       color: var(--text-soft);
-      background: var(--surface-3);
+      background: var(--surface-3)
     }
 
     .empty {
       text-align: center;
       padding: 48px 20px;
       color: var(--text-soft);
-      font-size: 13px;
+      font-size: 13px
     }
 
-    /* ═══ COMPETITION ENTRIES ═══ */
+    /* Competition entries */
     .entry-item {
       display: grid;
       grid-template-columns: 2fr 3fr 1fr;
@@ -579,24 +578,24 @@
       margin-bottom: 8px;
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 12px
     }
 
     .entry-name {
       font-weight: 600;
       font-size: 14px;
-      color: var(--text);
+      color: var(--text)
     }
 
     .entry-email {
       font-size: 13px;
-      color: var(--text-2);
+      color: var(--text-2)
     }
 
     .entry-date {
       font-size: 11px;
       color: var(--text-soft);
-      text-align: right;
+      text-align: right
     }
 
     .entry-hdr {
@@ -608,21 +607,21 @@
       font-weight: 600;
       color: var(--text-soft);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.06em
     }
 
-    /* ═══ SETTINGS DRAWER ═══ */
+    /* Drawer */
     .overlay {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.55);
-      z-index: 100;
+      z-index: 100
     }
 
     .overlay.open {
       display: block;
-      animation: fadeIn 0.2s;
+      animation: fadeIn 0.2s
     }
 
     .drawer {
@@ -638,11 +637,11 @@
       padding: 36px 24px;
       overflow-y: auto;
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)
     }
 
     .drawer.open {
-      transform: translateX(0);
+      transform: translateX(0)
     }
 
     .drawer-x {
@@ -654,11 +653,11 @@
       color: var(--text-soft);
       font-size: 22px;
       cursor: pointer;
-      line-height: 1;
+      line-height: 1
     }
 
     .drawer-x:hover {
-      color: var(--text);
+      color: var(--text)
     }
 
     .drawer h2 {
@@ -666,17 +665,17 @@
       font-size: 22px;
       font-weight: 400;
       color: var(--gold);
-      margin-bottom: 6px;
+      margin-bottom: 6px
     }
 
     .drawer .sub {
       font-size: 12px;
       color: var(--text-soft);
-      margin-bottom: 24px;
+      margin-bottom: 24px
     }
 
     .drawer .field {
-      margin-bottom: 18px;
+      margin-bottom: 18px
     }
 
     .drawer .field label {
@@ -686,7 +685,7 @@
       color: var(--text-soft);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-bottom: 5px;
+      margin-bottom: 5px
     }
 
     .drawer .field input {
@@ -699,11 +698,11 @@
       font-family: inherit;
       font-size: 14px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s
     }
 
     .drawer .field input:focus {
-      border-color: var(--gold-mid);
+      border-color: var(--gold-mid)
     }
 
     .drawer .dbtn {
@@ -719,82 +718,97 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
-      margin-top: 6px;
+      margin-top: 6px
     }
 
     .drawer .dbtn:hover {
-      background: #d4b58e;
+      background: #d4b58e
     }
 
     .drawer .dmsg {
       margin-top: 10px;
       font-size: 12px;
       text-align: center;
-      min-height: 18px;
+      min-height: 18px
     }
 
     .drawer .dmsg.ok {
-      color: var(--green);
+      color: var(--green)
     }
 
     .drawer .dmsg.fail {
-      color: var(--red);
+      color: var(--red)
     }
 
     .drawer hr {
       border: none;
       border-top: 1px solid var(--border);
-      margin: 24px 0;
+      margin: 24px 0
     }
 
-    /* ═══ RESPONSIVE ═══ */
+    /* Error banner */
+    .error-banner {
+      background: var(--red-bg);
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 14px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+      display: none
+    }
+
+    .error-banner.show {
+      display: block
+    }
+
     @media(max-width:900px) {
       .kpi-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr)
       }
 
       .charts-row,
       .secondary-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
       }
 
       .funnel {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 8px
       }
 
       .funnel-arrow {
-        transform: rotate(90deg);
+        transform: rotate(90deg)
       }
     }
 
     @media(max-width:600px) {
       .kpi-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)
       }
 
       .hdr {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 12px
       }
 
       .entry-item {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
       }
 
       .entry-hdr {
-        display: none;
+        display: none
       }
     }
   </style>
 </head>
 
 <body>
-
   <div class="shell">
 
-    <!-- HEADER -->
+    <!-- Header -->
     <div class="hdr">
       <div class="hdr-left">
         <img class="hdr-logo"
@@ -812,29 +826,31 @@
       </div>
     </div>
 
-    <!-- TABS -->
+    <!-- Error banner -->
+    <div class="error-banner" id="errorBanner"></div>
+
+    <!-- Tabs -->
     <div class="tabs">
       <button class="tab active" onclick="switchTab('overview',this)">Overview</button>
       <button class="tab" onclick="switchTab('feedback',this)">Feedback</button>
       <button class="tab" onclick="switchTab('competition',this)">Competition</button>
     </div>
 
-    <!-- ═══ TAB: OVERVIEW ═══ -->
+    <!-- TAB: OVERVIEW -->
     <div class="tab-panel active" id="panelOverview">
-
       <div class="kpi-grid">
         <div class="kpi">
           <div class="kpi-label">Today</div>
-          <div class="kpi-val" id="kToday">—</div>
+          <div class="kpi-val" id="kToday">0</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">This Week</div>
-          <div class="kpi-val" id="kWeek">—</div>
+          <div class="kpi-val" id="kWeek">0</div>
           <div class="kpi-badge flat" id="kWeekBadge" style="display:none"></div>
         </div>
         <div class="kpi">
           <div class="kpi-label">This Month</div>
-          <div class="kpi-val" id="kMonth">—</div>
+          <div class="kpi-val" id="kMonth">0</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Avg Rating</div>
@@ -843,7 +859,7 @@
         </div>
         <div class="kpi">
           <div class="kpi-label">All Time</div>
-          <div class="kpi-val" id="kTotal">—</div>
+          <div class="kpi-val" id="kTotal">0</div>
         </div>
       </div>
 
@@ -872,26 +888,25 @@
         </div>
       </div>
 
-      <!-- Funnel -->
       <div class="funnel">
         <div class="funnel-stat">
-          <h3 id="fun5">—</h3>
+          <h3 id="fun5">0</h3>
           <p>5-Star Taps</p>
         </div>
         <div class="funnel-arrow">→</div>
         <div class="funnel-stat">
-          <h3 id="funComp">—</h3>
+          <h3 id="funComp">0</h3>
           <p>Entered Competition</p>
         </div>
         <div class="funnel-arrow">→</div>
         <div class="funnel-stat">
-          <h3 id="funRate">—</h3>
+          <h3 id="funRate">0%</h3>
           <p>Google Conversion</p>
         </div>
       </div>
     </div>
 
-    <!-- ═══ TAB: FEEDBACK ═══ -->
+    <!-- TAB: FEEDBACK -->
     <div class="tab-panel" id="panelFeedback">
       <div class="filter-bar">
         <span class="panel-title">Private Feedback</span>
@@ -908,7 +923,7 @@
       </div>
     </div>
 
-    <!-- ═══ TAB: COMPETITION ═══ -->
+    <!-- TAB: COMPETITION -->
     <div class="tab-panel" id="panelCompetition">
       <div class="filter-bar">
         <span class="panel-title">Dinner for Two — Entries</span>
@@ -919,7 +934,6 @@
         <div class="empty">Loading…</div>
       </div>
     </div>
-
   </div>
 
   <!-- SETTINGS DRAWER -->
@@ -928,7 +942,6 @@
     <button class="drawer-x" onclick="closeDrawer()">✕</button>
     <h2>Settings</h2>
     <p class="sub">Configure your review gate and competition.</p>
-
     <div class="field"><label>Admin Password</label><input type="password" id="sPw" placeholder="Enter password" />
     </div>
     <div class="field"><label>Google Review URL</label><input type="url" id="sUrl"
@@ -937,245 +950,447 @@
     </div>
     <div class="field"><label>Manager Email</label><input type="email" id="sEmail" placeholder="you@bar-asra.com" />
     </div>
-    <div class="field"><label>Competition Prize Name</label><input type="text" id="sPrize"
-        placeholder="Dinner for Two" /></div>
+    <div class="field"><label>Competition Prize</label><input type="text" id="sPrize" placeholder="Dinner for Two" />
+    </div>
     <button class="dbtn" onclick="saveSettings()">Save Settings</button>
     <div class="dmsg" id="sMsg"></div>
-
     <hr />
-
     <div style="text-align:center;">
       <p style="font-size:12px;color:var(--text-soft);margin-bottom:12px;">Review Page QR Code</p>
       <canvas id="qrCanvas" width="200" height="200"
         style="background:#fff;border-radius:14px;padding:16px;display:inline-block;"></canvas>
-      <div class="field" style="margin-top:14px;">
-        <label>Review Page URL</label>
-        <input type="url" id="qrUrl" placeholder="https://yourdomain.com/review.html" />
-      </div>
+      <div class="field" style="margin-top:14px;"><label>Review Page URL</label><input type="url" id="qrUrl"
+          placeholder="https://yourdomain.com/review.html" /></div>
       <button class="dbtn" onclick="genQR()">Generate QR</button>
       <p style="font-size:10px;color:var(--text-soft);margin-top:8px;">Print and place on every table.</p>
     </div>
   </div>
 
   <script>
-    // ═════════════════════════════════════════════════════════════
-    //  CONFIG
-    // ═════════════════════════════════════════════════════════════
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
+    // ═══════════════════════════════════════════════════════════
+    //  CONFIG — paste your deployed Web App URL here
+    // ═══════════════════════════════════════════════════════════
+    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbylnCpRKN5G2DmUEgRTxdQ2hwOMUI6qUUGPinVEVOly6hIGLVIV8GwQmUqUMxdGJEqS/exec";
 
-    let DATA = null;
-    let filter = "all";
-    let chartTrend, chartHourly, chartDow;
+    var DATA = null;
+    var currentFilter = "all";
+    var chartTrend = null, chartHourly = null, chartDow = null;
 
-    // ═════════════════════════════════════════════════════════════
-    //  LOAD DATA
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+    //  LOAD DATA — with full error handling
+    // ═══════════════════════════════════════════════════════════
+
     async function loadData() {
-      document.getElementById("statusTxt").textContent = "Refreshing…";
+      var statusEl = document.getElementById("statusTxt");
+      var errorEl = document.getElementById("errorBanner");
+      statusEl.textContent = "Refreshing…";
+
       try {
-        const r = await fetch(WEB_APP_URL + "?action=getData");
-        DATA = await r.json();
+        var res = await fetch(WEB_APP_URL + "?action=getData");
+        var json = await res.json();
+
+        // Check if server returned an error
+        if (json.status === "error") {
+          showError("Server error: " + (json.message || "Unknown error") +
+            "\n\nMake sure you ran initializeSheet() in Apps Script and redeployed.");
+          statusEl.textContent = "Error";
+          return;
+        }
+
+        // Check if we got the expected data structure
+        if (!json.stats) {
+          showError("Unexpected response from server. Got: " + JSON.stringify(json).substring(0, 200) +
+            "\n\nMake sure your Web App URL is correct and you deployed as 'Anyone'.");
+          statusEl.textContent = "Error";
+          return;
+        }
+
+        // Success
+        DATA = json;
+        errorEl.style.display = "none";
+        errorEl.classList.remove("show");
         renderAll();
-        const t = new Date(DATA.lastUpdated);
-        document.getElementById("statusTxt").textContent =
-          "Live · " + t.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-      } catch (e) {
-        console.error(e);
-        document.getElementById("statusTxt").textContent = "Error — check URL";
+
+        var t = new Date(DATA.lastUpdated);
+        statusEl.textContent = "Live · " + t.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+      } catch (err) {
+        console.error("loadData error:", err);
+
+        if (err.message && err.message.includes("Failed to fetch")) {
+          showError("Cannot reach your Google Apps Script. Possible causes:\n" +
+            "• WEB_APP_URL is incorrect\n" +
+            "• The script isn't deployed yet\n" +
+            "• CORS is blocked (try opening: " + WEB_APP_URL + "?action=getData in a new tab)");
+        } else {
+          showError("Error loading data: " + err.message);
+        }
+        statusEl.textContent = "Connection error";
       }
     }
 
+    function showError(msg) {
+      var el = document.getElementById("errorBanner");
+      el.textContent = msg;
+      el.classList.add("show");
+      el.style.display = "block";
+    }
+
     function renderAll() {
-      renderKPIs(); renderDist(); renderTrend(); renderHourly(); renderDow();
-      renderFunnel(); renderFeedback(); renderComp();
+      if (!DATA || !DATA.stats) return;
+      try { renderKPIs(); } catch (e) { console.error("renderKPIs:", e); }
+      try { renderDist(); } catch (e) { console.error("renderDist:", e); }
+      try { renderTrend(); } catch (e) { console.error("renderTrend:", e); }
+      try { renderHourly(); } catch (e) { console.error("renderHourly:", e); }
+      try { renderDow(); } catch (e) { console.error("renderDow:", e); }
+      try { renderFunnel(); } catch (e) { console.error("renderFunnel:", e); }
+      try { renderFeedback(); } catch (e) { console.error("renderFeedback:", e); }
+      try { renderComp(); } catch (e) { console.error("renderComp:", e); }
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  KPIs
-    // ═════════════════════════════════════════════════════════════
-    function renderKPIs() {
-      const s = DATA.stats;
-      document.getElementById("kToday").textContent = s.todayRatings;
-      document.getElementById("kWeek").textContent = s.weekRatings;
-      document.getElementById("kMonth").textContent = s.monthRatings;
-      document.getElementById("kAvg").textContent = s.avgRating;
-      document.getElementById("kTotal").textContent = s.totalRatings.toLocaleString();
+    // ═══════════════════════════════════════════════════════════
 
-      badge("kWeekBadge", s.weekChange, "% vs prev week");
-      badge("kAvgBadge", s.avgChange, "% avg WoW");
+    function renderKPIs() {
+      var s = DATA.stats;
+      document.getElementById("kToday").textContent = s.todayRatings || 0;
+      document.getElementById("kWeek").textContent = s.weekRatings || 0;
+      document.getElementById("kMonth").textContent = s.monthRatings || 0;
+      document.getElementById("kAvg").textContent = s.avgRating || "—";
+      document.getElementById("kTotal").textContent = (s.totalRatings || 0).toLocaleString();
+
+      setBadge("kWeekBadge", s.weekChange, "% vs prev week");
+      setBadge("kAvgBadge", s.avgChange, "% avg WoW");
     }
 
-    function badge(id, val, suffix) {
-      const el = document.getElementById(id);
-      if (val === 0 || val === undefined) { el.style.display = "none"; return; }
+    function setBadge(id, val, suffix) {
+      var el = document.getElementById(id);
+      if (!val || val === 0) { el.style.display = "none"; return; }
       el.style.display = "inline-flex";
-      const arrow = val > 0 ? "↑" : "↓";
+      var arrow = val > 0 ? "↑" : "↓";
       el.textContent = arrow + " " + Math.abs(val) + suffix;
       el.className = "kpi-badge " + (val > 0 ? "up" : "down");
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  DISTRIBUTION
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function renderDist() {
-      const d = DATA.stats.distribution, t = DATA.stats.totalRatings;
+      var d = DATA.stats.distribution || { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      var t = DATA.stats.totalRatings || 0;
       document.getElementById("distTag").textContent = t + " total";
-      const c = document.getElementById("distBars"); c.innerHTML = "";
-      const mx = Math.max(...Object.values(d), 1);
-      for (let i = 5; i >= 1; i--) {
-        const pct = t > 0 ? ((d[i] / t) * 100).toFixed(0) : 0;
-        c.innerHTML += `<div class="dist-row"><span class="dist-lbl">${i}★</span><div class="dist-track"><div class="dist-fill s${i}" style="width:${(d[i] / mx) * 100}%"></div></div><span class="dist-ct">${d[i]}</span><span class="dist-pct">${pct}%</span></div>`;
+
+      var c = document.getElementById("distBars");
+      c.innerHTML = "";
+
+      var vals = [d[1] || 0, d[2] || 0, d[3] || 0, d[4] || 0, d[5] || 0];
+      var mx = Math.max.apply(null, vals) || 1;
+
+      for (var i = 5; i >= 1; i--) {
+        var count = d[i] || 0;
+        var pct = t > 0 ? ((count / t) * 100).toFixed(0) : "0";
+        var barPct = (count / mx) * 100;
+        c.innerHTML +=
+          '<div class="dist-row">' +
+          '<span class="dist-lbl">' + i + '★</span>' +
+          '<div class="dist-track"><div class="dist-fill s' + i + '" style="width:' + barPct + '%"></div></div>' +
+          '<span class="dist-ct">' + count + '</span>' +
+          '<span class="dist-pct">' + pct + '%</span>' +
+          '</div>';
       }
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  CHARTS
-    // ═════════════════════════════════════════════════════════════
-    const CX = {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { backgroundColor: "#1a1815", titleColor: "#C9A87C", bodyColor: "#ede6db", borderColor: "#2a2622", borderWidth: 1, cornerRadius: 8, padding: 10 } },
-      scales: {
-        x: { grid: { color: "rgba(255,255,255,0.03)" }, ticks: { color: "#7a746c", font: { size: 9 } } },
-        y: { grid: { color: "rgba(255,255,255,0.03)" }, ticks: { color: "#7a746c", font: { size: 9 } } },
-      },
+    // ═══════════════════════════════════════════════════════════
+
+    var chartColors = {
+      grid: "rgba(255,255,255,0.03)",
+      tick: "#7a746c",
+      tooltip: { bg: "#1a1815", title: "#C9A87C", body: "#ede6db", border: "#2a2622" },
+      gold: "#C9A87C",
+      goldDim: "rgba(201,168,124,0.2)",
+      goldMid: "rgba(201,168,124,0.25)",
+      goldBar: "rgba(201,168,124,0.5)"
     };
 
+    function makeTooltip() {
+      return {
+        backgroundColor: chartColors.tooltip.bg,
+        titleColor: chartColors.tooltip.title,
+        bodyColor: chartColors.tooltip.body,
+        borderColor: chartColors.tooltip.border,
+        borderWidth: 1, cornerRadius: 8, padding: 10
+      };
+    }
+
     function renderTrend() {
-      const ctx = document.getElementById("cTrend").getContext("2d");
+      var trend = DATA.dailyTrend;
+      if (!trend || !Array.isArray(trend) || trend.length === 0) return;
+
+      var ctx = document.getElementById("cTrend").getContext("2d");
       if (chartTrend) chartTrend.destroy();
-      const t = DATA.dailyTrend;
+
+      var labels = [];
+      var counts = [];
+      var avgs = [];
+      for (var i = 0; i < trend.length; i++) {
+        labels.push(trend[i].label || "");
+        counts.push(trend[i].count || 0);
+        avgs.push(trend[i].avg);
+      }
+
       chartTrend = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: t.map(d => d.label),
+          labels: labels,
           datasets: [
-            { label: "Ratings", data: t.map(d => d.count), backgroundColor: "rgba(201,168,124,0.25)", borderColor: "rgba(201,168,124,0.5)", borderWidth: 1, borderRadius: 4, yAxisID: "y", order: 2 },
-            { label: "Avg", data: t.map(d => d.avg), type: "line", borderColor: "#C9A87C", backgroundColor: "transparent", borderWidth: 2, pointRadius: 0, pointHoverRadius: 3, tension: 0.4, yAxisID: "y1", order: 1 },
-          ],
+            {
+              label: "Ratings",
+              data: counts,
+              backgroundColor: chartColors.goldMid,
+              borderColor: chartColors.goldBar,
+              borderWidth: 1,
+              borderRadius: 4,
+              yAxisID: "y",
+              order: 2
+            },
+            {
+              label: "Avg",
+              data: avgs,
+              type: "line",
+              borderColor: chartColors.gold,
+              backgroundColor: "transparent",
+              borderWidth: 2,
+              pointRadius: 0,
+              pointHoverRadius: 3,
+              tension: 0.4,
+              yAxisID: "y1",
+              order: 1,
+              spanGaps: true
+            }
+          ]
         },
         options: {
-          ...CX, scales: {
-            x: { ...CX.scales.x, ticks: { ...CX.scales.x.ticks, maxTicksLimit: 10 } },
-            y: { ...CX.scales.y, position: "left", beginAtZero: true },
-            y1: { ...CX.scales.y, position: "right", min: 1, max: 5, grid: { drawOnChartArea: false } },
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: makeTooltip() },
+          scales: {
+            x: { grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 }, maxTicksLimit: 10 } },
+            y: { position: "left", beginAtZero: true, grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 } } },
+            y1: { position: "right", min: 1, max: 5, grid: { drawOnChartArea: false }, ticks: { color: chartColors.tick, font: { size: 9 } } }
           }
-        },
+        }
       });
     }
 
     function renderHourly() {
-      const ctx = document.getElementById("cHourly").getContext("2d");
+      var h = DATA.hourly;
+      if (!h || !Array.isArray(h)) return;
+
+      var ctx = document.getElementById("cHourly").getContext("2d");
       if (chartHourly) chartHourly.destroy();
-      const h = DATA.hourly, mx = Math.max(...h);
+
+      var labels = [];
+      var data = [];
+      var mx = 0;
+      for (var i = 0; i < 24; i++) {
+        labels.push(String(i).padStart(2, "0"));
+        var v = h[i] || 0;
+        data.push(v);
+        if (v > mx) mx = v;
+      }
+
+      var colors = [];
+      for (var j = 0; j < data.length; j++) {
+        colors.push(data[j] === mx && mx > 0 ? chartColors.gold : chartColors.goldDim);
+      }
+
       chartHourly = new Chart(ctx, {
         type: "bar",
-        data: {
-          labels: Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, "0")),
-          datasets: [{ data: h, backgroundColor: h.map(v => v === mx ? "#C9A87C" : "rgba(201,168,124,0.2)"), borderRadius: 3 }],
-        },
-        options: { ...CX, scales: { x: { ...CX.scales.x, ticks: { ...CX.scales.x.ticks, maxTicksLimit: 12 } }, y: { ...CX.scales.y, beginAtZero: true } } },
+        data: { labels: labels, datasets: [{ data: data, backgroundColor: colors, borderRadius: 3 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: makeTooltip() },
+          scales: {
+            x: { grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 }, maxTicksLimit: 12 } },
+            y: { beginAtZero: true, grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 } } }
+          }
+        }
       });
     }
 
     function renderDow() {
-      const ctx = document.getElementById("cDow").getContext("2d");
+      var dow = DATA.dayOfWeek;
+      if (!dow) return;
+
+      var ctx = document.getElementById("cDow").getContext("2d");
       if (chartDow) chartDow.destroy();
-      const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-      const full = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-      const d = full.map(n => DATA.dayOfWeek[n] || 0), mx = Math.max(...d);
+
+      var shortDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+      var fullDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      var data = [];
+      var mx = 0;
+      for (var i = 0; i < fullDays.length; i++) {
+        var v = dow[fullDays[i]] || 0;
+        data.push(v);
+        if (v > mx) mx = v;
+      }
+
+      var colors = [];
+      for (var j = 0; j < data.length; j++) {
+        colors.push(data[j] === mx && mx > 0 ? chartColors.gold : chartColors.goldDim);
+      }
+
       chartDow = new Chart(ctx, {
         type: "bar",
-        data: {
-          labels: days,
-          datasets: [{ data: d, backgroundColor: d.map(v => v === mx ? "#C9A87C" : "rgba(201,168,124,0.2)"), borderRadius: 3 }],
-        },
-        options: { ...CX, scales: { x: CX.scales.x, y: { ...CX.scales.y, beginAtZero: true } } },
+        data: { labels: shortDays, datasets: [{ data: data, backgroundColor: colors, borderRadius: 3 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: makeTooltip() },
+          scales: {
+            x: { grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 } } },
+            y: { beginAtZero: true, grid: { color: chartColors.grid }, ticks: { color: chartColors.tick, font: { size: 9 } } }
+          }
+        }
       });
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  FUNNEL
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function renderFunnel() {
-      const s = DATA.stats;
+      var s = DATA.stats || {};
       document.getElementById("fun5").textContent = s.fiveStarCount || 0;
       document.getElementById("funComp").textContent = DATA.totalCompEntries || 0;
       document.getElementById("funRate").textContent = (s.googleConversion || 0) + "%";
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  FEEDBACK
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function renderFeedback() {
-      const list = document.getElementById("fbList");
-      const fb = filter === "all"
-        ? DATA.recentFeedback
-        : DATA.recentFeedback.filter(f => String(f.rating) === filter);
+      var list = document.getElementById("fbList");
+      var all = DATA.recentFeedback || [];
 
-      if (!fb.length) { list.innerHTML = '<div class="empty">No feedback found.</div>'; return; }
+      var fb = currentFilter === "all"
+        ? all
+        : all.filter(function (f) { return String(f.rating) === currentFilter; });
 
-      list.innerHTML = fb.map(f => {
-        const stars = Array.from({ length: 5 }, (_, i) => `<span class="${i < f.rating ? "on" : "off"}">★</span>`).join("");
-        return `<div class="fb-item"><div class="fb-top"><div class="fb-left"><div class="fb-stars">${stars}</div><span class="fb-name">${esc(f.name)}</span>${f.contact ? `<span class="fb-contact">· ${esc(f.contact)}</span>` : ""}</div><span class="fb-date">${f.date || ""}</span></div>${f.message ? `<div class="fb-msg">${esc(f.message)}</div>` : ""}<span class="fb-badge ${(f.status || "new").toLowerCase()}">${f.status || "New"}</span></div>`;
-      }).join("");
+      if (fb.length === 0) {
+        list.innerHTML = '<div class="empty">No feedback yet. Feedback from 1-4 star ratings will appear here.</div>';
+        return;
+      }
+
+      var html = "";
+      for (var i = 0; i < fb.length; i++) {
+        var f = fb[i];
+        var stars = "";
+        for (var s = 0; s < 5; s++) {
+          stars += '<span class="' + (s < f.rating ? "on" : "off") + '">★</span>';
+        }
+        html +=
+          '<div class="fb-item">' +
+          '<div class="fb-top">' +
+          '<div class="fb-left">' +
+          '<div class="fb-stars">' + stars + '</div>' +
+          '<span class="fb-name">' + esc(f.name) + '</span>' +
+          (f.contact ? '<span class="fb-contact">· ' + esc(f.contact) + '</span>' : '') +
+          '</div>' +
+          '<span class="fb-date">' + (f.date || '') + '</span>' +
+          '</div>' +
+          (f.message ? '<div class="fb-msg">' + esc(f.message) + '</div>' : '') +
+          '<span class="fb-badge ' + (f.status || "new").toLowerCase() + '">' + (f.status || "New") + '</span>' +
+          '</div>';
+      }
+      list.innerHTML = html;
     }
 
     function setFilter(v, el) {
-      filter = v;
-      document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+      currentFilter = v;
+      var pills = document.querySelectorAll(".pill");
+      for (var i = 0; i < pills.length; i++) pills[i].classList.remove("active");
       el.classList.add("active");
       if (DATA) renderFeedback();
     }
 
-    // ═════════════════════════════════════════════════════════════
-    //  COMPETITION ENTRIES
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+    //  COMPETITION
+    // ═══════════════════════════════════════════════════════════
+
     function renderComp() {
       document.getElementById("compCount").textContent = (DATA.totalCompEntries || 0) + " entries";
-      const list = document.getElementById("compList");
-      const entries = DATA.compEntries || [];
+      var list = document.getElementById("compList");
+      var entries = DATA.compEntries || [];
 
-      if (!entries.length) { list.innerHTML = '<div class="empty">No competition entries yet.</div>'; return; }
+      if (entries.length === 0) {
+        list.innerHTML = '<div class="empty">No entries yet. When a 5-star customer enters the competition, they\'ll appear here.</div>';
+        return;
+      }
 
-      list.innerHTML = entries.map(e =>
-        `<div class="entry-item"><span class="entry-name">${esc(e.name)}</span><span class="entry-email">${esc(e.email)}</span><span class="entry-date">${e.date || ""}</span></div>`
-      ).join("");
+      var html = "";
+      for (var i = 0; i < entries.length; i++) {
+        var e = entries[i];
+        html +=
+          '<div class="entry-item">' +
+          '<span class="entry-name">' + esc(e.name) + '</span>' +
+          '<span class="entry-email">' + esc(e.email) + '</span>' +
+          '<span class="entry-date">' + (e.date || '') + '</span>' +
+          '</div>';
+      }
+      list.innerHTML = html;
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  TABS
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function switchTab(name, el) {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+      var tabs = document.querySelectorAll(".tab");
+      var panels = document.querySelectorAll(".tab-panel");
+      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+      for (var j = 0; j < panels.length; j++) panels[j].classList.remove("active");
       el.classList.add("active");
-      document.getElementById("panel" + name.charAt(0).toUpperCase() + name.slice(1)).classList.add("active");
+      var panelId = "panel" + name.charAt(0).toUpperCase() + name.slice(1);
+      document.getElementById(panelId).classList.add("active");
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  EXPORT
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function exportCSV() {
-      if (!DATA) return;
-      // Export both feedback and competition
-      const rows = [["Type", "Rating", "Name", "Contact/Email", "Message", "Date", "Status"]];
-      (DATA.recentFeedback || []).forEach(f => {
+      if (!DATA) { alert("No data loaded yet."); return; }
+      var rows = [["Type", "Rating", "Name", "Contact/Email", "Message", "Date", "Status"]];
+      var fb = DATA.recentFeedback || [];
+      for (var i = 0; i < fb.length; i++) {
+        var f = fb[i];
         rows.push(["Feedback", f.rating, f.name, f.contact, '"' + (f.message || "").replace(/"/g, '""') + '"', f.date, f.status]);
-      });
-      (DATA.compEntries || []).forEach(e => {
-        rows.push(["Competition", "5", e.name, e.email, "", "", e.date]);
-      });
-      const csv = rows.map(r => r.join(",")).join("\n");
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a"); a.href = url;
+      }
+      var comp = DATA.compEntries || [];
+      for (var j = 0; j < comp.length; j++) {
+        var c = comp[j];
+        rows.push(["Competition", "5", c.name, c.email, "", c.date, ""]);
+      }
+      var csv = "";
+      for (var r = 0; r < rows.length; r++) csv += rows[r].join(",") + "\n";
+      var blob = new Blob([csv], { type: "text/csv" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
       a.download = "bar-asra-data-" + new Date().toISOString().slice(0, 10) + ".csv";
-      a.click(); URL.revokeObjectURL(url);
+      a.click();
+      URL.revokeObjectURL(url);
     }
 
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
     //  DRAWER
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+
     function openDrawer() {
       document.getElementById("overlay").classList.add("open");
       document.getElementById("drawer").classList.add("open");
@@ -1186,52 +1401,73 @@
     }
 
     async function saveSettings() {
-      const pw = document.getElementById("sPw").value;
-      const msg = document.getElementById("sMsg");
+      var pw = document.getElementById("sPw").value;
+      var msg = document.getElementById("sMsg");
       if (!pw) { msg.className = "dmsg fail"; msg.textContent = "Password required."; return; }
-
-      const p = new URLSearchParams({ action: "updateSettings", password: pw });
-      const gUrl = document.getElementById("sUrl").value, thr = document.getElementById("sThr").value;
-      const email = document.getElementById("sEmail").value, prize = document.getElementById("sPrize").value;
-      if (gUrl) p.append("googleUrl", gUrl); if (thr) p.append("threshold", thr);
-      if (email) p.append("email", email); if (prize) p.append("prize", prize);
-
+      var p = new URLSearchParams({ action: "updateSettings", password: pw });
+      var v;
+      v = document.getElementById("sUrl").value; if (v) p.append("googleUrl", v);
+      v = document.getElementById("sThr").value; if (v) p.append("threshold", v);
+      v = document.getElementById("sEmail").value; if (v) p.append("email", v);
+      v = document.getElementById("sPrize").value; if (v) p.append("prize", v);
       try {
-        const r = await fetch(WEB_APP_URL + "?" + p);
-        const d = await r.json();
+        var r = await fetch(WEB_APP_URL + "?" + p);
+        var d = await r.json();
         msg.className = d.success ? "dmsg ok" : "dmsg fail";
         msg.textContent = d.message || (d.success ? "Saved." : "Failed.");
       } catch (e) {
         new Image().src = WEB_APP_URL + "?" + p;
         msg.className = "dmsg ok"; msg.textContent = "Sent.";
       }
-      setTimeout(() => { msg.textContent = ""; }, 3000);
+      setTimeout(function () { msg.textContent = ""; }, 3000);
     }
 
-    // ═════════════════════════════════════════════════════════════
-    //  QR CODE (placeholder — use qrcode.js in production)
-    // ═════════════════════════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+    //  QR CODE
+    // ═══════════════════════════════════════════════════════════
+
     function genQR() {
-      const url = document.getElementById("qrUrl").value.trim();
-      if (!url) return alert("Enter a URL.");
-      const canvas = document.getElementById("qrCanvas");
-      const ctx = canvas.getContext("2d"), sz = 200, cell = 6, cols = Math.floor(sz / cell);
+      var url = document.getElementById("qrUrl").value.trim();
+      if (!url) { alert("Enter a URL."); return; }
+      var canvas = document.getElementById("qrCanvas");
+      var ctx = canvas.getContext("2d");
+      var sz = 200, cell = 6, cols = Math.floor(sz / cell);
       ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, sz, sz);
       ctx.fillStyle = "#0a0908";
       drawFP(ctx, 2, 2, cell); drawFP(ctx, cols - 9, 2, cell); drawFP(ctx, 2, cols - 9, cell);
-      let seed = 0; for (let i = 0; i < url.length; i++) { seed = ((seed << 5) - seed) + url.charCodeAt(i); seed |= 0; } seed = Math.abs(seed);
-      for (let r = 0; r < cols; r++) for (let c = 0; c < cols; c++) {
-        if ((r < 10 && c < 10) || (r < 10 && c > cols - 10) || (r > cols - 10 && c < 10)) continue;
-        seed = (seed * 16807 + 12345) & 0x7fffffff; if (seed % 3 === 0) ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
+      var seed = 0;
+      for (var i = 0; i < url.length; i++) { seed = ((seed << 5) - seed) + url.charCodeAt(i); seed |= 0; }
+      seed = Math.abs(seed);
+      for (var r = 0; r < cols; r++) {
+        for (var c = 0; c < cols; c++) {
+          if ((r < 10 && c < 10) || (r < 10 && c > cols - 10) || (r > cols - 10 && c < 10)) continue;
+          seed = (seed * 16807 + 12345) & 0x7fffffff;
+          if (seed % 3 === 0) ctx.fillRect(c * cell, r * cell, cell - 1, cell - 1);
+        }
       }
       ctx.fillStyle = "#0a0908"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
       ctx.fillText("SCAN TO REVIEW", sz / 2, sz - 5);
     }
-    function drawFP(ctx, c, r, s) { ctx.fillRect(c * s, r * s, 7 * s, 7 * s); ctx.fillStyle = "#fff"; ctx.fillRect((c + 1) * s, (r + 1) * s, 5 * s, 5 * s); ctx.fillStyle = "#0a0908"; ctx.fillRect((c + 2) * s, (r + 2) * s, 3 * s, 3 * s); }
 
-    function esc(s) { const d = document.createElement("div"); d.textContent = s || ""; return d.innerHTML; }
+    function drawFP(ctx, c, r, s) {
+      ctx.fillStyle = "#0a0908";
+      ctx.fillRect(c * s, r * s, 7 * s, 7 * s);
+      ctx.fillStyle = "#fff";
+      ctx.fillRect((c + 1) * s, (r + 1) * s, 5 * s, 5 * s);
+      ctx.fillStyle = "#0a0908";
+      ctx.fillRect((c + 2) * s, (r + 2) * s, 3 * s, 3 * s);
+    }
 
-    // ── Init ──
+    function esc(s) {
+      var d = document.createElement("div");
+      d.textContent = s || "";
+      return d.innerHTML;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    //  INIT
+    // ═══════════════════════════════════════════════════════════
+
     loadData();
     setInterval(loadData, 60000);
   </script>
