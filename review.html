@@ -56,7 +56,7 @@
       overflow-x: hidden;
     }
 
-    /* Ambient glow — warm, like candlelight */
+    /* Ambient glow */
     body::before {
       content: "";
       position: fixed;
@@ -105,7 +105,7 @@
       padding: 44px 32px 40px;
     }
 
-    /* ── Logo ── */
+    /* Logo */
     .logo-wrap {
       text-align: center;
       margin-bottom: 40px;
@@ -118,7 +118,7 @@
       filter: brightness(1.1);
     }
 
-    /* ── Screens ── */
+    /* Screens */
     .screen {
       display: none;
     }
@@ -133,14 +133,13 @@
         opacity: 0;
         transform: translateY(14px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* ── Typography ── */
+    /* Typography */
     .heading {
       font-family: "Cormorant Garamond", serif;
       font-weight: 400;
@@ -160,7 +159,7 @@
       margin-bottom: 28px;
     }
 
-    /* ── Stars ── */
+    /* Stars */
     .stars {
       display: flex;
       justify-content: center;
@@ -237,7 +236,7 @@
       line-height: 1.5;
     }
 
-    /* ── Form Elements ── */
+    /* Form Elements */
     .mini-stars {
       display: flex;
       justify-content: center;
@@ -314,7 +313,44 @@
       display: none;
     }
 
-    /* ── Buttons ── */
+    /* Consent checkboxes */
+    .consent-area {
+      margin-bottom: 20px;
+    }
+
+    .consent-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .consent-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 1px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .consent-check span {
+      flex: 1;
+    }
+
+    .consent-error {
+      font-size: 12px;
+      color: var(--red);
+      margin-top: -6px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    /* Buttons */
     .btn {
       display: block;
       width: 100%;
@@ -377,7 +413,7 @@
       }
     }
 
-    /* ── Google button ── */
+    /* Google button */
     .btn-google {
       background: var(--gold);
       color: var(--bg);
@@ -397,7 +433,7 @@
       padding: 3px;
     }
 
-    /* ── Thank You ── */
+    /* Thank You */
     .done-icon {
       width: 68px;
       height: 68px;
@@ -415,7 +451,6 @@
         opacity: 0;
         transform: scale(0.4);
       }
-
       to {
         opacity: 1;
         transform: scale(1);
@@ -428,14 +463,14 @@
       color: var(--gold);
     }
 
-    /* ── Divider ── */
+    /* Divider */
     .divider {
       height: 1px;
       margin: 20px 0;
       background: linear-gradient(90deg, transparent, var(--border), transparent);
     }
 
-    /* ── Toast ── */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 20px;
@@ -472,7 +507,7 @@
           alt="Bar Asra" />
       </div>
 
-      <!-- ═══ SCREEN 1: Rate ═══ -->
+      <!-- SCREEN 1: Rate -->
       <div class="screen active" id="sRate">
         <p class="heading">How was your experience?</p>
         <p class="subtext">Tap a star to let us know.</p>
@@ -481,7 +516,7 @@
         <p class="footnote">Your honest feedback helps us improve.</p>
       </div>
 
-      <!-- ═══ SCREEN 2a: Feedback (1-4 stars) — LOCKED ═══ -->
+      <!-- SCREEN 2a: Feedback (1-4 stars) -->
       <div class="screen" id="sFeedback">
         <div class="mini-stars" id="miniStars1"></div>
         <p class="heading">We want to do better.</p>
@@ -489,7 +524,7 @@
 
         <div class="field">
           <label>What could we improve? <span class="opt">(required)</span></label>
-          <textarea id="fMsg" placeholder="Tell us about your experience…"></textarea>
+          <textarea id="fMsg" placeholder="Tell us about your experience..."></textarea>
           <div class="error-hint" id="fMsgErr">Please share your feedback so we can improve.</div>
         </div>
         <div class="field">
@@ -504,7 +539,7 @@
         <button class="btn btn-gold" id="btnFeedback" onclick="submitFeedback()">Send Feedback</button>
       </div>
 
-      <!-- ═══ SCREEN 2b: Competition (5 stars) — LOCKED ═══ -->
+      <!-- SCREEN 2b: Competition (5 stars) -->
       <div class="screen" id="sCompetition">
         <div class="done-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -526,6 +561,24 @@
           <input type="email" id="cEmail" placeholder="you@example.com" autocomplete="email" />
           <div class="error-hint" id="cEmailErr">Please enter a valid email.</div>
         </div>
+        <div class="field">
+          <label>Phone number <span class="opt">(optional)</span></label>
+          <input type="tel" id="cPhone" placeholder="(555) 123-4567" autocomplete="tel" />
+        </div>
+
+        <!-- Consent checkboxes -->
+        <div class="consent-area">
+          <label class="consent-check">
+            <input type="checkbox" id="cConsent" />
+            <span id="consentText">I agree to the contest rules and understand you'll use my contact info to administer the contest and contact the winner.</span>
+          </label>
+          <div class="consent-error" id="cConsentErr">You must agree to the contest rules to enter.</div>
+
+          <label class="consent-check" id="marketingWrap">
+            <input type="checkbox" id="cMarketing" />
+            <span id="marketingText">I want to receive promos, events, and future giveaways by email (I can unsubscribe anytime).</span>
+          </label>
+        </div>
 
         <a class="btn btn-google" id="googleBtn" href="#" onclick="submitCompetitionAndGo(event)">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -545,11 +598,10 @@
           Leave a Google Review
         </a>
 
-        <p class="footnote" style="margin-top:16px;">By entering, you agree to be contacted about the draw.<br />Winner
-          selected monthly.</p>
+        <p class="footnote" style="margin-top:16px;">Winner selected monthly.</p>
       </div>
 
-      <!-- ═══ SCREEN 3: Done ═══ -->
+      <!-- SCREEN 3: Done -->
       <div class="screen" id="sDone">
         <div class="done-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -569,79 +621,95 @@
     // ═════════════════════════════════════════════════════════════
     //  CONFIG — Replace with your deployed Web App URL
     // ═════════════════════════════════════════════════════════════
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyQ159kaM5J353bgu_TxqeHn5P1Y-8jA8zL5LjozpNWcgR_J8l0MIaem1SmHjF3y_di/exec";
+    var WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyCqTH3VD6L7OcwYXBjoHWBMpxRF5BovCYxAweryMzk-Or-dpoc9dAMXMG8P9jUQH9h/exec";
 
-    let GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJ_RfOprhzhlQRWgl0QMXqkKg";
-    let GOOGLE_THRESHOLD = 5;
-    let selectedRating = 0;
+    var GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJ_RfOprhzhlQRWgl0QMXqkKg";
+    var GOOGLE_THRESHOLD = 5;
+    var selectedRating = 0;
+    var MARKETING_ENABLED = true;
 
-    const LABELS = { 1: "Terrible", 2: "Poor", 3: "Okay", 4: "Good", 5: "Excellent" };
+    var LABELS = { 1: "Terrible", 2: "Poor", 3: "Okay", 4: "Good", 5: "Excellent" };
+
+    // ── Track page view (QR scan) ──
+    try {
+      fetch(WEB_APP_URL + "?action=trackEvent&event=page_view", { mode: "no-cors" }).catch(function () { });
+    } catch (e) { }
 
     // ── Build Stars ──
     (function buildStars() {
-      const wrap = document.getElementById("starsWrap");
-      for (let i = 1; i <= 5; i++) {
-        const b = document.createElement("button");
-        b.className = "star-btn"; b.dataset.v = i;
+      var wrap = document.getElementById("starsWrap");
+      for (var i = 1; i <= 5; i++) {
+        var b = document.createElement("button");
+        b.className = "star-btn";
+        b.dataset.v = i;
         b.setAttribute("aria-label", i + " star" + (i > 1 ? "s" : ""));
         b.innerHTML = '<svg viewBox="0 0 24 24"><polygon class="sf" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/><polygon class="so" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
-        b.addEventListener("pointerenter", () => light(i));
-        b.addEventListener("pointerleave", () => light(selectedRating));
-        b.addEventListener("click", () => pick(i));
+        b.addEventListener("pointerenter", (function (val) { return function () { light(val); }; })(i));
+        b.addEventListener("pointerleave", function () { light(selectedRating); });
+        b.addEventListener("click", (function (val) { return function () { pick(val); }; })(i));
         wrap.appendChild(b);
       }
     })();
 
     function light(n) {
-      document.querySelectorAll(".star-btn").forEach((b, i) => b.classList.toggle("lit", i < n));
-      const lbl = document.getElementById("starLabel");
+      var btns = document.querySelectorAll(".star-btn");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.toggle("lit", i < n);
+      }
+      var lbl = document.getElementById("starLabel");
       lbl.textContent = n > 0 ? LABELS[n] : "";
       lbl.classList.toggle("on", n > 0);
     }
 
     function pick(n) {
-      selectedRating = n; light(n);
+      selectedRating = n;
+      light(n);
+
       // Fire rating immediately
-      const pingUrl = WEB_APP_URL + "?action=submitRating&rating=" + n + "&source=website";
+      var pingUrl = WEB_APP_URL + "?action=submitRating&rating=" + n + "&source=website";
       try {
-        fetch(pingUrl, { mode: "no-cors" }).catch(() => {});
+        fetch(pingUrl, { mode: "no-cors" }).catch(function () { });
       } catch (e) {
         new Image().src = pingUrl;
       }
 
-      setTimeout(() => {
+      setTimeout(function () {
         if (n >= GOOGLE_THRESHOLD) {
           show("sCompetition");
-          setTimeout(() => document.getElementById("cName").focus(), 400);
+          setTimeout(function () { document.getElementById("cName").focus(); }, 400);
         } else {
           renderMini("miniStars1", n);
           show("sFeedback");
-          setTimeout(() => document.getElementById("fMsg").focus(), 400);
+          setTimeout(function () { document.getElementById("fMsg").focus(); }, 400);
         }
       }, 300);
     }
 
     // ── Screens ──
     function show(id) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      var screens = document.querySelectorAll(".screen");
+      for (var i = 0; i < screens.length; i++) screens[i].classList.remove("active");
       document.getElementById(id).classList.add("active");
     }
 
     function renderMini(elId, n) {
-      const el = document.getElementById(elId); el.innerHTML = "";
-      for (let i = 1; i <= 5; i++) {
-        const s = document.createElement("span");
-        s.className = i <= n ? "on" : "off"; s.textContent = "★"; el.appendChild(s);
+      var el = document.getElementById(elId);
+      el.innerHTML = "";
+      for (var i = 1; i <= 5; i++) {
+        var s = document.createElement("span");
+        s.className = i <= n ? "on" : "off";
+        s.textContent = "\u2605";
+        el.appendChild(s);
       }
     }
 
-    // ── Feedback Submit (1-4 stars — LOCKED, message required) ──
+    // ── Feedback Submit (1-4 stars) ──
     async function submitFeedback() {
-      const msg = document.getElementById("fMsg").value.trim();
-      const name = document.getElementById("fName").value.trim();
-      const contact = document.getElementById("fContact").value.trim();
-      const errEl = document.getElementById("fMsgErr");
-      const btn = document.getElementById("btnFeedback");
+      var msg = document.getElementById("fMsg").value.trim();
+      var name = document.getElementById("fName").value.trim();
+      var contact = document.getElementById("fContact").value.trim();
+      var errEl = document.getElementById("fMsgErr");
+      var btn = document.getElementById("btnFeedback");
 
       if (!msg) {
         errEl.style.display = "block";
@@ -650,17 +718,16 @@
       }
       errEl.style.display = "none";
 
-      btn.classList.add("loading"); btn.disabled = true;
+      btn.classList.add("loading");
+      btn.disabled = true;
 
-      const p = new URLSearchParams({
-        action: "submitFeedback", rating: selectedRating, name, contact, message: msg,
+      var p = new URLSearchParams({
+        action: "submitFeedback", rating: selectedRating, name: name, contact: contact, message: msg,
       });
-      
+
       try {
-        // Use fetch with no-cors mode for Google Apps Script
         await fetch(WEB_APP_URL + "?" + p, { mode: "no-cors" });
       } catch (e) {
-        // Fallback to image ping if fetch fails
         new Image().src = WEB_APP_URL + "?" + p;
       }
 
@@ -668,37 +735,60 @@
       show("sDone");
     }
 
-    // ── Competition Submit + Google Redirect (5 stars — LOCKED) ──
+    // ── Competition Submit + Google Redirect (5 stars) ──
     async function submitCompetitionAndGo(e) {
       e.preventDefault();
-      const name = document.getElementById("cName").value.trim();
-      const email = document.getElementById("cEmail").value.trim();
-      let valid = true;
+      var name = document.getElementById("cName").value.trim();
+      var email = document.getElementById("cEmail").value.trim();
+      var consent = document.getElementById("cConsent").checked;
+      var valid = true;
 
+      // Validate name
       if (!name) {
-        document.getElementById("cNameErr").style.display = "block"; valid = false;
+        document.getElementById("cNameErr").style.display = "block";
+        valid = false;
       } else {
         document.getElementById("cNameErr").style.display = "none";
       }
 
+      // Validate email
       if (!email || !email.includes("@")) {
-        document.getElementById("cEmailErr").style.display = "block"; valid = false;
+        document.getElementById("cEmailErr").style.display = "block";
+        valid = false;
       } else {
         document.getElementById("cEmailErr").style.display = "none";
       }
 
+      // Validate contest consent (required)
+      if (!consent) {
+        document.getElementById("cConsentErr").style.display = "block";
+        valid = false;
+      } else {
+        document.getElementById("cConsentErr").style.display = "none";
+      }
+
       if (!valid) return;
 
-      // Log competition entry
-      const p = new URLSearchParams({ action: "submitCompetition", name, email });
+      // Build submission params
+      var phone = document.getElementById("cPhone").value.trim();
+      var marketingOptIn = document.getElementById("cMarketing").checked ? "Yes" : "No";
+      var p = new URLSearchParams({
+        action: "submitCompetition",
+        name: name,
+        email: email,
+        phone: phone,
+        contestConsent: "Yes",
+        marketingOptIn: marketingOptIn,
+      });
+
       try {
         await fetch(WEB_APP_URL + "?" + p, { mode: "no-cors" });
       } catch (e) {
         new Image().src = WEB_APP_URL + "?" + p;
       }
 
-      // Redirect to Google after a brief moment
-      setTimeout(() => {
+      // Redirect to Google after brief moment
+      setTimeout(function () {
         window.location.href = GOOGLE_REVIEW_URL;
       }, 400);
     }
@@ -706,18 +796,32 @@
     // ── Load Settings ──
     async function loadSettings() {
       try {
-        const res = await fetch(WEB_APP_URL + "?action=getSettings");
-        const data = await res.json();
+        var res = await fetch(WEB_APP_URL + "?action=getSettings");
+        var data = await res.json();
         if (data.googleReviewUrl) GOOGLE_REVIEW_URL = data.googleReviewUrl;
         if (data.googleThreshold) GOOGLE_THRESHOLD = parseInt(data.googleThreshold);
+
+        // Update consent text from settings
+        if (data.contestConsentText) {
+          document.getElementById("consentText").textContent = data.contestConsentText;
+        }
+        if (data.marketingConsentText) {
+          document.getElementById("marketingText").textContent = data.marketingConsentText;
+        }
+
+        // Show/hide marketing opt-in based on settings
+        MARKETING_ENABLED = data.marketingEnabled !== false;
+        document.getElementById("marketingWrap").style.display = MARKETING_ENABLED ? "flex" : "none";
       } catch (e) { /* use defaults */ }
     }
 
-    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+    function delay(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
     function toast(m) {
-      const t = document.getElementById("toast");
-      t.textContent = m; t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 3000);
+      var t = document.getElementById("toast");
+      t.textContent = m;
+      t.classList.add("show");
+      setTimeout(function () { t.classList.remove("show"); }, 3000);
     }
 
     loadSettings();
