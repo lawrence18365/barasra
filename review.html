@@ -666,7 +666,7 @@
     }
 
     // ── Competition Submit + Google Redirect (5 stars — LOCKED) ──
-    function submitCompetitionAndGo(e) {
+    async function submitCompetitionAndGo(e) {
       e.preventDefault();
       const name = document.getElementById("cName").value.trim();
       const email = document.getElementById("cEmail").value.trim();
