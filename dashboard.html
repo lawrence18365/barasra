@@ -1028,9 +1028,13 @@
 
         // Success
         DATA = json;
+        DATA_READY = true;
         errorEl.style.display = "none";
         errorEl.classList.remove("show");
-        renderAll();
+        // Only render if user is authenticated (gate is hidden)
+        if (document.getElementById("passwordGate").style.display === "none") {
+          renderAll();
+        }
 
         var t = new Date(DATA.lastUpdated);
         statusEl.textContent = "Live · " + t.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -1531,17 +1535,24 @@
     }
 
     // ═══════════════════════════════════════════════════════════
-    //  PASSWORD GATE
+    //  PASSWORD GATE (with background loading)
     // ═══════════════════════════════════════════════════════════
 
     const DASHBOARD_PASSWORD = "barasra2024";
+    var DATA_LOADING = false;
+    var DATA_READY = false;
 
     function checkPassword() {
       var input = document.getElementById("gatePassword").value;
       if (input === DASHBOARD_PASSWORD) {
         sessionStorage.setItem("barasra_auth", "1");
         document.getElementById("passwordGate").style.display = "none";
-        loadData();
+        // If data already loaded, render it immediately
+        if (DATA_READY && DATA) {
+          renderAll();
+        }
+        // Start auto-refresh
+        setInterval(loadData, 60000);
       } else {
         document.getElementById("gateError").style.display = "block";
         document.getElementById("gatePassword").value = "";
@@ -1552,19 +1563,21 @@
     function initGate() {
       if (sessionStorage.getItem("barasra_auth") === "1") {
         document.getElementById("passwordGate").style.display = "none";
+        // Already authenticated, load data normally
+        loadData();
+        setInterval(loadData, 60000);
         return true;
+      }
+      // Start loading data in background while waiting for password
+      if (!DATA_LOADING) {
+        DATA_LOADING = true;
+        loadData();
       }
       return false;
     }
 
-    // ═══════════════════════════════════════════════════════════
-    //  INIT
-    // ═══════════════════════════════════════════════════════════
-
-    if (initGate()) {
-      loadData();
-      setInterval(loadData, 60000);
-    }
+    // Initialize on page load
+    initGate();
   </script>
 </body>
 
